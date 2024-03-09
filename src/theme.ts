@@ -40,3 +40,11 @@ export const darkTheme: Theme = createTheme({
   },
   ...sharedTheme,
 });
+
+export const globalStyle = (theme: Theme) => ({
+  'html, body': {
+    margin: 0,
+    height: '100%',
+    backgroundColor: theme.palette.background.default,
+  },
+});

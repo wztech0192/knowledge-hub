@@ -1,6 +1,6 @@
 import React from 'react';
-import { CssBaseline, ThemeProvider } from '@mui/material';
-import { darkTheme, lightTheme } from '../theme';
+import { CssBaseline, GlobalStyles, ThemeProvider } from '@mui/material';
+import { darkTheme, globalStyle, lightTheme } from '../theme';
 import { usePersistState } from '../hooks/usePersistState';
 
 /**
@@ -29,6 +29,7 @@ export const CustomThemeProvider = ({
     <ThemeProvider theme={themeMode === 'dark' ? darkTheme : lightTheme}>
       <ThemeContext.Provider value={[themeMode, setThemeMode]}>
         <CssBaseline />
+        <GlobalStyles styles={globalStyle} />
         {children}
       </ThemeContext.Provider>
     </ThemeProvider>
