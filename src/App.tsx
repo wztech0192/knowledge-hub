@@ -9,21 +9,26 @@ import { MetadataContextProvider } from './providers/MetadataContextProvider';
  * Handles routing
  * @see https://reactrouter.com/en/main/routers/create-browser-router
  */
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      element: <Layout />,
+      children: [
+        {
+          path: '/',
+          element: <Home />,
+        },
+        {
+          path: '/placeholder/:id',
+          element: <PlaceholderPage />,
+        },
+      ],
+    },
+  ],
   {
-    element: <Layout />,
-    children: [
-      {
-        path: '/',
-        element: <Home />,
-      },
-      {
-        path: '/placeholder/:id',
-        element: <PlaceholderPage />,
-      },
-    ],
+    basename: import.meta.env.BASE_URL,
   },
-]);
+);
 
 function App() {
   return (
