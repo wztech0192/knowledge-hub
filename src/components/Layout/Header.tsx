@@ -1,7 +1,7 @@
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 // import Typography from '@mui/material/Typography';
-import {alpha} from '@mui/material/styles'
+import { alpha } from '@mui/material/styles';
 import { IconButton, Stack, styled } from '@mui/material';
 import InputBase from '@mui/material/InputBase';
 import { ThemeToggle } from './ThemeToggle';
@@ -26,9 +26,9 @@ const Search = styled('div')(({ theme }) => ({
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
-  width: '100%',
+  width: '70%',
   [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
+    marginLeft: theme.spacing(1),
     width: 'auto',
   },
 }));
