@@ -1,4 +1,26 @@
 {
+  "Categories":{
+    "DiscreteMath": {
+      "subjects":[
+        {
+          "topics": {
+            "Logic": ["Propositions", "Truth Tables", "Tautology and Equivalence", "De Morgan's Laws"],
+            "Sets": ["Definition", "Subset-Powerset", "Set Operations", "Set Identities"],
+            "Counting Methods 1": ["Pie 1", "Pie 2", "Product Rule 1", "Product Rule 2"],
+            "Counting Methods 2": ["Permutations", "Combinations", "Examples", "Identities"],
+            "Intro to Number Theory": ["Divisibility", "Primes", "GCD and LCM", "Algorithm for GCD"],
+            "Pigeonhole Principle": ["Pigeonhole Principle 1", "Pigeonhole Principle 2", "Application 1", "Application 2"],
+            "Matrices": ["Definitions", "Operations"], 
+            "Relations": ["Relations", "Equivalence Relations", "Equivalence Relations and Partitions", "Relation Representations"],
+            "Mathematical Induction": ["Mathematical Induction 1", "Mathematical Induction 2", "Mathematical Induction 3", "Mathematical Induction 4"],
+            "Recursive Sequences": ["Recursive Sequences 1", "Recursive Sequences 2"],
+            "Graphs and Trees": ["Graphs", "The Handshaking Theorem", "Trees", "Eulerian and Hamiltonian Graphs"],
+            "Probability": ["Sample Spaces and Events and Probability", "Conditional Probability and Independence of Events", "Examples", "Total Probability and Bayes Theorem"]
+          }
+        }
+      ]
+    }
+  },
   "version": "0.0.1",
   "description": "This is the metadata file to describe our data. For example, categories, sections, pdfs..."
 }
