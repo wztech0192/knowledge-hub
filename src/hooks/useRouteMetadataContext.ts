@@ -71,7 +71,9 @@ export class RouteMetadataContext {
 
   // The path back to the current topic
   getTopicPath(level = -1) {
-    return `${this.getSubjectPath()}/t/${this.topicIds.slice(level).join('/')}`;
+    return `${this.getSubjectPath()}/t/${this.topicIds
+      .slice(0, level)
+      .join('/')}`;
   }
 
   previousPathCache: string = '';
