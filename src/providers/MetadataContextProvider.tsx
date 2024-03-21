@@ -1,41 +1,12 @@
 import React from 'react';
 import metadataJson from '@/assets/knowledge_hub_metadata.json';
+import { KnowledgeHubMetadata } from '@/types';
 
 /**
  * Context for metadata
  */
-export interface KnowledgeHubMetadata {
-  version: string;
-  description: string;
-  categories: Category[];
-}
 
-export interface Category {
-  name: string;
-  subject: Subject[];
-}
-
-//changed subjectDescription to description
-export interface Subject {
-  title: string;
-  description: string;
-  topics: Topic[];
-}
-
-//Creating a tree like structure
-export interface Topic {
-  name: string;
-  subTopics?: Topic[];
-}
-
-// interface SubTopic{
-//   topicName: string;
-//   subTopic: [];
-// }
-
-type Metadata = typeof metadataJson;
-
-const MetadataContext = React.createContext<Metadata>(metadataJson);
+const MetadataContext = React.createContext<KnowledgeHubMetadata>(metadataJson);
 
 export const MetadataContextProvider = ({
   children,

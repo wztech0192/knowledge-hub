@@ -4,6 +4,8 @@ import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
 import { PlaceholderPage } from './pages/PlaceholderPage';
 import { MetadataContextProvider } from './providers/MetadataContextProvider';
+import Subject from './pages/Subject';
+import Topic from './pages/Topic';
 
 /**
  * Handles routing
@@ -21,6 +23,14 @@ const router = createBrowserRouter(
         {
           path: '/placeholder/:id',
           element: <PlaceholderPage />,
+        },
+        {
+          path: '/c/:categoryId/s/:subjectId',
+          element: <Subject />,
+        },
+        {
+          path: '/c/:categoryId/s/:subjectId/t/*',
+          element: <Topic />,
         },
       ],
     },
