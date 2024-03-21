@@ -1,9 +1,10 @@
 import { useMetadata } from '@/providers/MetadataContextProvider';
 import { Category, KnowledgeHubMetadata, Subject, Topic } from '@/types';
 import { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 export class RouteMetadataContext {
+  readonly pathname: string;
   readonly categoryId: number;
   readonly subjectId: number;
   readonly topicIds: number[];
@@ -19,10 +20,12 @@ export class RouteMetadataContext {
 
   constructor(
     metadata: KnowledgeHubMetadata,
+    pathname: string,
     categoryIdParam = '',
     subjectIdParam = '',
     topicIdsParam = '',
   ) {
+    this.pathname = pathname;
     this.categoryId = parseInt(categoryIdParam ?? '');
     this.subjectId = parseInt(subjectIdParam ?? '');
     this.topicIds = topicIdsParam.split('/').map(i => parseInt(i)) ?? [];
@@ -63,9 +66,7 @@ export class RouteMetadataContext {
 
   // The path back to the current subject
   getSubjectPath() {
-    return `${import.meta.env.BASE_URL}/c/${this.categoryId}/s/${
-      this.subjectId
-    }`;
+    return `/c/${this.categoryId}/s/${this.subjectId}`;
   }
 
   // The path back to the current topic
@@ -91,17 +92,25 @@ export class RouteMetadataContext {
   }
 
   getNextPath(nextPath: string) {
-    return `/${window.location.pathname}/${nextPath}`;
+    return `${this.pathname}/${nextPath}`;
   }
 }
 
 const useRouteMetadataContext = () => {
   const metadata = useMetadata();
   const { categoryId, subjectId, ['*']: topicIds } = useParams();
+  const { pathname } = useLocation();
 
   return useMemo(
-    () => new RouteMetadataContext(metadata, categoryId, subjectId, topicIds),
-    [metadata, categoryId, subjectId, topicIds],
+    () =>
+      new RouteMetadataContext(
+        metadata,
+        pathname,
+        categoryId,
+        subjectId,
+        topicIds,
+      ),
+    [metadata, categoryId, subjectId, topicIds, pathname],
   );
 };
 
