@@ -1,8 +1,8 @@
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 // import Typography from '@mui/material/Typography';
-import {alpha} from '@mui/material/styles'
-import { IconButton, Stack, styled } from '@mui/material';
+import { alpha } from '@mui/material/styles';
+import { Box, IconButton, styled } from '@mui/material';
 import InputBase from '@mui/material/InputBase';
 import { ThemeToggle } from './ThemeToggle';
 import { NavLink } from 'react-router-dom';
@@ -26,10 +26,10 @@ const Search = styled('div')(({ theme }) => ({
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
-  width: '100%',
+  width: '20%',
   [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
+    margin: '0 auto',
+    width: '50%',
   },
 }));
 
@@ -65,7 +65,7 @@ export const Header = () => {
         <IconButton color="inherit" component={NavLink} to="/">
           <Home />
         </IconButton>
-        <Stack direction="row" alignItems="center">
+        <Box sx={{ flexGrow: 1 }}>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -75,7 +75,7 @@ export const Header = () => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-        </Stack>
+        </Box>
 
         <ThemeToggle />
       </Toolbar>
