@@ -85,7 +85,7 @@ export class RouteMetadataContext {
       else if (this.topicHierarchy.length === 1) {
         this.previousPathCache = this.getSubjectPath();
       } else {
-        this.previousPathCache = import.meta.env.BASE_URL;
+        this.previousPathCache = '/';
       }
     }
     return this.previousPathCache;
