@@ -63,7 +63,9 @@ export class RouteMetadataContext {
 
   // The path back to the current subject
   getSubjectPath() {
-    return `/c/${this.categoryId}/s/${this.subjectId}`;
+    return `${import.meta.env.BASE_URL}/c/${this.categoryId}/s/${
+      this.subjectId
+    }`;
   }
 
   // The path back to the current topic
@@ -82,14 +84,14 @@ export class RouteMetadataContext {
       else if (this.topicHierarchy.length === 1) {
         this.previousPathCache = this.getSubjectPath();
       } else {
-        this.previousPathCache = '/';
+        this.previousPathCache = import.meta.env.BASE_URL;
       }
     }
     return this.previousPathCache;
   }
 
   getNextPath(nextPath: string) {
-    return `${window.location.pathname}/${nextPath}`;
+    return `/${window.location.pathname}/${nextPath}`;
   }
 }
 
