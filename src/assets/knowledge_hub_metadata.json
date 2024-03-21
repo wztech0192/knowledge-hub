@@ -1,26 +1,211 @@
 {
-  "Categories":{
-    "DiscreteMath": {
-      "subjects":[
-        {
-          "topics": {
-            "Logic": ["Propositions", "Truth Tables", "Tautology and Equivalence", "De Morgan's Laws"],
-            "Sets": ["Definition", "Subset-Powerset", "Set Operations", "Set Identities"],
-            "Counting Methods 1": ["Pie 1", "Pie 2", "Product Rule 1", "Product Rule 2"],
-            "Counting Methods 2": ["Permutations", "Combinations", "Examples", "Identities"],
-            "Intro to Number Theory": ["Divisibility", "Primes", "GCD and LCM", "Algorithm for GCD"],
-            "Pigeonhole Principle": ["Pigeonhole Principle 1", "Pigeonhole Principle 2", "Application 1", "Application 2"],
-            "Matrices": ["Definitions", "Operations"], 
-            "Relations": ["Relations", "Equivalence Relations", "Equivalence Relations and Partitions", "Relation Representations"],
-            "Mathematical Induction": ["Mathematical Induction 1", "Mathematical Induction 2", "Mathematical Induction 3", "Mathematical Induction 4"],
-            "Recursive Sequences": ["Recursive Sequences 1", "Recursive Sequences 2"],
-            "Graphs and Trees": ["Graphs", "The Handshaking Theorem", "Trees", "Eulerian and Hamiltonian Graphs"],
-            "Probability": ["Sample Spaces and Events and Probability", "Conditional Probability and Independence of Events", "Examples", "Total Probability and Bayes Theorem"]
+  "knowledgeHubMetadata": {
+    "version": "0.0.1",
+    "description": "This is the metadata file to describe our data. For example, categories, sections, pdfs...",
+    "categories": [
+      {
+        "name": "Maths",
+        "subject": [
+          {
+            "title": "Discrete Math",
+            "description": "The first chapter in the course of Discrete Math",
+            "topics": [
+              {
+                "name": "Logic",
+                "subTopics": [
+                  {
+                    "name": "Propositions"
+                  },
+                  {
+                    "name": "Truth Tables"
+                  },
+                  {
+                    "name": "Tautology and Equivalence"
+                  },
+                  {
+                    "name": "De Morgan's Law"
+                  }
+                ]
+              },
+              {
+                "name": "Sets",
+                "subTopics": [
+                  {
+                    "name": "Definition"
+                  },
+                  {
+                    "name": "Subset-PowerSet"
+                  },
+                  {
+                    "name": "Set Operatiosn"
+                  },
+                  {
+                    "name": "Set Identities"
+                  }
+                ]
+              },
+              {
+                "name": "Counting Methods 1",
+                "subTopics": [
+                  {
+                    "name": "Pie 1"
+                  },
+                  {
+                    "name": "Pie 2"
+                  },
+                  {
+                    "name": "Product Rule 1"
+                  },
+                  {
+                    "name": "Product Rule 2"
+                  }
+                ]
+              },
+              {
+                "name": "Counting Methods 2",
+                "subTopics": [
+                  {
+                    "name": "Permutations"
+                  },
+                  {
+                    "name": "Combinations"
+                  },
+                  {
+                    "name": "Examples"
+                  },
+                  {
+                    "name": "Identities"
+                  }
+                ]
+              },
+              {
+                "name": "Intro to Number Theory",
+                "subTopics": [
+                  {
+                    "name": "Divisibility"
+                  },
+                  {
+                    "name": "Primes"
+                  },
+                  {
+                    "name": "GCD And LCM"
+                  },
+                  {
+                    "name": "Algorithm for GCD"
+                  }
+                ]
+              },
+              {
+                "name": "Pigeonhole Principle",
+                "subTopics": [
+                  {
+                    "name": "Pigeonhole Principle 1"
+                  },
+                  {
+                    "name": "Pigeonhole Principle 2"
+                  },
+                  {
+                    "name": "Application 1"
+                  },
+                  {
+                    "name": "Application 2"
+                  }
+                ]
+              },
+              {
+                "name": "Matrices",
+                "subTopics": [
+                  {
+                    "name": "Definitions"
+                  },
+                  {
+                    "name": "Operations"
+                  }
+                ]
+              },
+              {
+                "name": "Relations",
+                "subTopics": [
+                  {
+                    "name": "Relations"
+                  },
+                  {
+                    "name": "Equivalence Relations"
+                  },
+                  {
+                    "name": "Equivalence Relations and Partitions"
+                  },
+                  {
+                    "name": "Relation Representations"
+                  }
+                ]
+              },
+              {
+                "name": "Mathematical Induction",
+                "subTopics": [
+                  {
+                    "name": "Mathematical Induction 1"
+                  },
+                  {
+                    "name": "Mathematical Induction 2"
+                  },
+                  {
+                    "name": "Mathematical Induction 3"
+                  },
+                  {
+                    "name": "Mathematical Induction 4"
+                  }
+                ]
+              },
+              {
+                "name": "Recursive Sequences",
+                "subTopics": [
+                  {
+                    "name": "Recursive Sequences 1"
+                  },
+                  {
+                    "name": "Recursive Sequences 2"
+                  }
+                ]
+              },
+              {
+                "name": "Graphs and Trees",
+                "subTopics": [
+                  {
+                    "name": "Graphs"
+                  },
+                  {
+                    "name": "The Handshaking Theorem"
+                  },
+                  {
+                    "name": "Trees"
+                  },
+                  {
+                    "name": "Eulerian And Hamiltonian Graphs"
+                  }
+                ]
+              },
+              {
+                "name": "Probability",
+                "subTopics": [
+                  {
+                    "name": "Sample Spaces And Events And Probability"
+                  },
+                  {
+                    "name": "Conditional Probability And Independence Of Events"
+                  },
+                  {
+                    "name": "Examples"
+                  },
+                  {
+                    "name": "Total Probability And Bayes Theorem"
+                  }
+                ]
+              }
+            ]
           }
-        }
-      ]
-    }
-  },
-  "version": "0.0.1",
-  "description": "This is the metadata file to describe our data. For example, categories, sections, pdfs..."
+        ]
+      }
+    ]
+  }
 }
