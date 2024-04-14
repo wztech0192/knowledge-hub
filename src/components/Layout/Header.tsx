@@ -1,33 +1,35 @@
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 // import Typography from '@mui/material/Typography';
-import { alpha } from '@mui/material/styles';
+import { alpha, createTheme } from '@mui/material/styles';
 import { Box, IconButton, styled } from '@mui/material';
 import InputBase from '@mui/material/InputBase';
 import { ThemeToggle } from './ThemeToggle';
 import { NavLink } from 'react-router-dom';
-import { Home } from '@mui/icons-material';
+import { Home, Palette } from '@mui/icons-material';
 import SearchIcon from '@mui/icons-material/Search';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  background: theme.palette.primary.main,
-  color: theme.palette.getContrastText(theme.palette.primary.main),
+  background: theme.palette.mode === 'dark' ? '#FFFFFF' : '#121212', 
+  color: theme.palette.mode === 'dark' ? '#121212' : '#FFFFFF',
   boxShadow: 'none',
-  borderBottomLeftRadius: 16,
-  borderBottomRightRadius: 16,
 }));
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha(theme.palette.common.white, 0.25),
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.black, 0.25),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
-  width: '20%',
+  width: '100%',
   [theme.breakpoints.up('sm')]: {
+    margin: '0 auto',
+    width: '60%',
+  },
+  [theme.breakpoints.down('sm')]: {
     margin: '0 auto',
     width: '50%',
   },
@@ -52,14 +54,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '20ch',
+      width: '87ch',
     },
   },
 }));
 
 export const Header = () => {
   return (
-    <StyledAppBar position="static">
+    <StyledAppBar position="sticky">
       <Toolbar
         sx={{ minHeight: '56px !important', justifyContent: 'space-between' }}>
         <IconButton color="inherit" component={NavLink} to="/">
