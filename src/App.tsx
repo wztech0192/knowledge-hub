@@ -11,6 +11,8 @@ import Topic from './pages/Topic';
  * Handles routing
  * @see https://reactrouter.com/en/main/routers/create-browser-router
  */
+
+//Changed the path names from /c, /s, /t to /category, /subject and /topic to be more understandable.
 const router = createBrowserRouter(
   [
     {
@@ -25,11 +27,11 @@ const router = createBrowserRouter(
           element: <PlaceholderPage />,
         },*/
         {
-          path: '/c/:categoryId/s/:subjectId',
+          path: '/category/:categoryId/subject/:subjectId',
           element: <Subject />,
         },
         {
-          path: '/c/:categoryId/s/:subjectId/t/*',
+          path: '/category/:categoryId/subject/:subjectId/topic/*',
           element: <Topic />,
         },
       ],

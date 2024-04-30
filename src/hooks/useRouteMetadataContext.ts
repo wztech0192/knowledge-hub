@@ -41,7 +41,6 @@ export class RouteMetadataContext {
       let topicsToPick = this.subject.topics;
 
       this.topicHierarchy = [];
-
       for (const idx of this.topicIds) {
         const topic = topicsToPick[idx];
         if (!topic) {
@@ -66,14 +65,12 @@ export class RouteMetadataContext {
 
   // The path back to the current subject
   getSubjectPath() {
-    return `/c/${this.categoryId}/s/${this.subjectId}`;
+    return `/category/${this.categoryId}/subject/${this.subjectId}`;
   }
 
   // The path back to the current topic
   getTopicPath(level = -1) {
-    return `${this.getSubjectPath()}/t/${this.topicIds
-      .slice(0, level)
-      .join('/')}`;
+    return `${this.getSubjectPath()}/topic/${this.topicIds.slice(0, level).join('/')}`;
   }
 
   previousPathCache: string = '';

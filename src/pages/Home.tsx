@@ -33,38 +33,37 @@ export const Home = () => {
             </Typography>
           </div>
         ))}
-        <Grid container spacing={4}>
+        <Grid container spacing={3}>
           <Grid item xs={12}>
             {metadata.categories.map((c, ci) => (
               <div key={ci} style={{ margin: '10px 0' }}>
                 {c.subjects.map((s, si) => {
                   return (
                     <NavLink
-                      to={`/c/${ci}/s/${si}`}
+                      to={`/category/${ci}/subject/${si}`}
                       style={{
                         textDecoration: 'none',
-                        color: '#DC6B19',
                       }}>
                       <Card variant="outlined">
                         <CardActionArea>
                           <CardMedia
                             component="img"
                             alt="Hot Air Baloon"
-                            height="300"
+                            height="210"
                             image={airballon}
                           />
                           <CardContent>
-                            <Typography variant="h4" color="text.primary">
+                            <Typography variant="h4" color="text.primary" gutterBottom>
                               {s.title}
                             </Typography>
-                            <Typography variant="body1" color="text.secondary">
+                            <Typography variant="body1" color="text.secondary" gutterBottom>
                               Discrete math deals with distinct, separate values
                               and structures like sets, functions, and graphs.
                               It's crucial in computer science, focusing on
                               logical reasoning and proof techniques to solve
                               problems efficiently.
                             </Typography>
-                            <Button variant="contained" size="medium">
+                            <Button variant="outlined" size="medium">
                               Learn More
                             </Button>
                           </CardContent>

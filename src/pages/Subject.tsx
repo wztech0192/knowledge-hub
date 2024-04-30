@@ -1,5 +1,5 @@
 import useRouteMetadataContext from '@/hooks/useRouteMetadataContext';
-import { Button, Typography } from '@mui/material';
+import { Button, Card, CardContent, Grid, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 const Subject = () => {
@@ -12,23 +12,43 @@ const Subject = () => {
         to={ctx.getPreviousPath()}>
         Back
       </Button>
-      <Typography variant="h3">Subject page</Typography>
+      <Typography variant="h3">Discrete Math</Typography>
       <Typography variant="subtitle1">
         Category: {ctx.category?.name}
       </Typography>
       <Typography variant="subtitle1">Subject: {ctx.subject?.title}</Typography>
-
       {!!ctx.subject?.topics?.length && (
         <>
           <Typography variant="subtitle1">Topics:</Typography>
-
-          <ol>
+          <Grid container spacing={1}>
+            {ctx.subject?.topics?.map((t, si) => (
+              <Grid item lg={4} sm={4} xs={12} >
+                <Card variant="outlined" style={{height: '100%'}}>
+                  <CardContent>
+                    <Typography variant='h6' gutterBottom>
+                        {t.name}
+                    </Typography>
+                    <ul style={{listStyleType: "none"}}>
+                      {t.subtopics?.map((t, i) => (
+                        <li key={i}>
+                          <NavLink to={ctx.getNextPath(`topic/${si}/${i}`)}>
+                            {t.name}
+                          </NavLink>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+          {/* <ol>
             {ctx.subject?.topics?.map((t, i) => (
               <li key={i}>
-                <NavLink to={ctx.getNextPath(`t/${i}`)}>{t.name}</NavLink>
+                <NavLink to={ctx.getNextPath(`topic/${i}`)}>{t.name}</NavLink>
               </li>
             ))}
-          </ol>
+          </ol> */}
         </>
       )}
     </div>

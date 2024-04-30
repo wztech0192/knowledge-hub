@@ -29,20 +29,6 @@ const Topic = () => {
         </Typography>
       )}
       <hr />
-      {!!ctx.topic?.subtopics?.length && (
-        <>
-          <Typography variant="subtitle1">Subtopics:</Typography>
-
-          <ol>
-            {ctx.topic?.subtopics?.map((t, i) => (
-              <li key={i}>
-                <NavLink to={ctx.getNextPath(`${i}`)}>{t.name}</NavLink>
-              </li>
-            ))}
-          </ol>
-        </>
-      )}
-
       {ctx.topic?.assetUrl && (
         <Typography>Render PDF {ctx.topic?.assetUrl}</Typography>
       )}

@@ -78,7 +78,6 @@ export const Header = () => {
             />
           </Search>
         </Box>
-
         <ThemeToggle />
       </Toolbar>
     </StyledAppBar>
