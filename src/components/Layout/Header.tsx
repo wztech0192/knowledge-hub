@@ -1,16 +1,16 @@
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 // import Typography from '@mui/material/Typography';
-import { alpha, createTheme } from '@mui/material/styles';
+import { alpha } from '@mui/material/styles';
 import { Box, IconButton, styled } from '@mui/material';
 import InputBase from '@mui/material/InputBase';
 import { ThemeToggle } from './ThemeToggle';
 import { NavLink } from 'react-router-dom';
-import { Home, Palette } from '@mui/icons-material';
+import { Home } from '@mui/icons-material';
 import SearchIcon from '@mui/icons-material/Search';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  background: theme.palette.mode === 'dark' ? '#FFFFFF' : '#121212', 
+  background: theme.palette.mode === 'dark' ? '#FFFFFF' : '#121212',
   color: theme.palette.mode === 'dark' ? '#121212' : '#FFFFFF',
   boxShadow: 'none',
 }));
@@ -53,9 +53,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '87ch',
-    },
   },
 }));
 
