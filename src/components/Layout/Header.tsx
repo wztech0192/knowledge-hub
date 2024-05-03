@@ -10,8 +10,8 @@ import { Home } from '@mui/icons-material';
 import SearchIcon from '@mui/icons-material/Search';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  background: theme.palette.mode === 'dark' ? '#FFFFFF' : '#121212',
-  color: theme.palette.mode === 'dark' ? '#121212' : '#FFFFFF',
+  background: theme.palette.mode === 'dark' ? '#121212' : '#121212',
+  color: theme.palette.mode === 'dark' ? '#FFFFFF' : '#FFFFFF',
   boxShadow: 'none',
 }));
 
@@ -31,7 +31,8 @@ const Search = styled('div')(({ theme }) => ({
   },
   [theme.breakpoints.down('sm')]: {
     margin: '0 auto',
-    width: '50%',
+    maxWidth: '50%',
+    width: '100%',
   },
 }));
 
@@ -71,8 +72,7 @@ export const Header = () => {
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
+              inputProps={{ 'aria-label': 'search' }}/>
           </Search>
         </Box>
         <ThemeToggle />

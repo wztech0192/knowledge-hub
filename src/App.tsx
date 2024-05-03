@@ -5,7 +5,7 @@ import { Home } from './pages/Home';
 //import { PlaceholderPage } from './pages/PlaceholderPage';
 import { MetadataContextProvider } from './providers/MetadataContextProvider';
 import Subject from './pages/Subject';
-import Topic from './pages/Topic';
+import SubTopic from './pages/SubTopic';
 
 /**
  * Handles routing
@@ -31,8 +31,8 @@ const router = createBrowserRouter(
           element: <Subject />,
         },
         {
-          path: '/category/:categoryId/subject/:subjectId/topic/*',
-          element: <Topic />,
+          path: '/category/:categoryId/subject/:subjectId/topic/:topicId/subtopic/:subTopicId',
+          element: <SubTopic />,
         },
       ],
     },

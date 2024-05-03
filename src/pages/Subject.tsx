@@ -22,13 +22,13 @@ const Subject = () => {
           <Typography variant="subtitle1">Topics:</Typography>
           <Grid container spacing={1}>
             {ctx.subject?.topics?.map((t, si) => (
-              <Grid item lg={4} sm={4} xs={12} >
-                <Card variant="outlined" style={{height: '100%'}}>
+              <Grid item lg={4} sm={4} xs={12} key={si}>
+                <Card variant="outlined" style={{ height: '100%' }}>
                   <CardContent>
-                    <Typography variant='h6' gutterBottom>
-                        {t.name}
+                    <Typography variant="h6" gutterBottom>
+                      {t.name}
                     </Typography>
-                    <ul style={{listStyleType: "none"}}>
+                    <ul style={{ listStyleType: 'none' }}>
                       {t.subtopics?.map((t, i) => (
                         <li key={i}>
                           <NavLink to={ctx.getNextPath(`topic/${si}/${i}`)}>

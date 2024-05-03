@@ -33,7 +33,7 @@ export const Home = () => {
             </Typography>
           </div>
         ))}
-        <Grid container spacing={3}>
+        <Grid container spacing={3} key={"false"}>
           <Grid item xs={12}>
             {metadata.categories.map((c, ci) => (
               <div key={ci} style={{ margin: '10px 0' }}>
@@ -43,7 +43,8 @@ export const Home = () => {
                       to={`/category/${ci}/subject/${si}`}
                       style={{
                         textDecoration: 'none',
-                      }}>
+                      }}
+                      key={si}>
                       <Card variant="outlined">
                         <CardActionArea>
                           <CardMedia

@@ -29,6 +29,7 @@ export class RouteMetadataContext {
     this.categoryId = parseInt(categoryIdParam ?? '');
     this.subjectId = parseInt(subjectIdParam ?? '');
     this.topicIds = topicIdsParam.split('/').map(i => parseInt(i)) ?? [];
+    console.log(this.topicIds);
 
     // assign the current category and subject
     this.category = metadata.categories[this.categoryId] ?? null;
