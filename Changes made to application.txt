@@ -1,0 +1,3 @@
+changed the name from Topic to SubTopic for the Topic file.
+Change the route from /category/:categoryId/subject/:subjectId/topic/* to /category/:categoryId/subject/:subjectId/topic/:topicId/subtopic/:subTopicId.
+Removed some warnings.

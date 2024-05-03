@@ -24,8 +24,9 @@ const sharedTheme: ThemeOptions = {
 
 export const lightTheme: Theme = createTheme({
   palette: {
+    mode: "light",
     primary: {
-      main: '#3f50b5',
+      main: '#0E46A3',
     },
   },
   ...sharedTheme,
@@ -35,7 +36,7 @@ export const darkTheme: Theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#657de8',
+      main: '#FEFAF6',
     },
   },
   ...sharedTheme,
@@ -44,7 +45,7 @@ export const darkTheme: Theme = createTheme({
 export const globalStyle = (theme: Theme) => ({
   'html, body': {
     margin: 0,
-    height: '100%',
+    height: '0%',
     backgroundColor: theme.palette.background.default,
   },
 });

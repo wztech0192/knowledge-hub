@@ -5,12 +5,14 @@ import { Home } from './pages/Home';
 import { PlaceholderPage } from './pages/PlaceholderPage';
 import { MetadataContextProvider } from './providers/MetadataContextProvider';
 import Subject from './pages/Subject';
-import Topic from './pages/Topic';
+import SubTopic from './pages/SubTopic';
 
 /**
  * Handles routing
  * @see https://reactrouter.com/en/main/routers/create-browser-router
  */
+
+//Changed the path names from /c, /s, /t to /category, /subject and /topic to be more understandable.
 const router = createBrowserRouter(
   [
     {
@@ -25,12 +27,12 @@ const router = createBrowserRouter(
           element: <PlaceholderPage />,
         },
         {
-          path: '/c/:categoryId/s/:subjectId',
+          path: '/category/:categoryId/subject/:subjectId',
           element: <Subject />,
         },
         {
-          path: '/c/:categoryId/s/:subjectId/t/*',
-          element: <Topic />,
+          path: '/category/:categoryId/subject/:subjectId/topic/:topicId/subtopic/:subTopicId',
+          element: <SubTopic />,
         },
       ],
     },
