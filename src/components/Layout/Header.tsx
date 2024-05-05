@@ -10,13 +10,8 @@ import { Home } from '@mui/icons-material';
 import SearchIcon from '@mui/icons-material/Search';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-<<<<<<< HEAD
-  background: theme.palette.primary.main,
-  color: theme.palette.getContrastText(theme.palette.primary.main),
-=======
   background: theme.palette.mode === 'dark' ? '#121212' : '#121212',
   color: theme.palette.mode === 'dark' ? '#FFFFFF' : '#FFFFFF',
->>>>>>> subjectPage
   boxShadow: 'none',
   borderBottomLeftRadius: 16,
   borderBottomRightRadius: 16,
@@ -34,16 +29,12 @@ const Search = styled('div')(({ theme }) => ({
   width: '20%',
   [theme.breakpoints.up('sm')]: {
     margin: '0 auto',
-<<<<<<< HEAD
-    width: '50%',
-=======
     width: '60%',
   },
   [theme.breakpoints.down('sm')]: {
     margin: '0 auto',
     maxWidth: '50%',
     width: '100%',
->>>>>>> subjectPage
   },
 }));
 
@@ -65,12 +56,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
-<<<<<<< HEAD
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-=======
->>>>>>> subjectPage
   },
 }));
 
