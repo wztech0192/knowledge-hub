@@ -26,7 +26,7 @@ export const Layout = () => {
         </div>
       <Header />
       <br />
-      <Container maxWidth="md">
+      <Container maxWidth="md" style={{ position: 'relative'}}>
         <Outlet />
       </Container>
     </Box>
