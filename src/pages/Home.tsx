@@ -1,7 +1,6 @@
 import { useMetadata } from '@/providers/MetadataContextProvider';
 import {
   Container, 
-  Divider,
   Grid,
   Typography,
   Box,
@@ -34,7 +33,7 @@ export const Home = () => {
                 {c.subjects.map((s, si) => {
                   return (
                     <NavLink
-                      to={`/category/${ci}/subject/${si}`}
+                      to={`/category/${si}/subject/${si}`}
                       style={{
                         textDecoration: 'none',
                       }}
@@ -70,8 +69,6 @@ export const Home = () => {
               </div>
             ))}
           </Grid>
-          <Divider />
-          {/* <pre>{JSON.stringify(metadata, null, 2)}</pre> */}
         </Grid>
       </Container>
     </Box>

@@ -1,31 +1,26 @@
 import useRouteMetadataContext from '@/hooks/useRouteMetadataContext';
-import { Button, Card, CardContent, Grid, Typography } from '@mui/material';
+import { Breadcrumbs, Button, Card, CardContent, Grid, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 const Subject = () => {
   const ctx = useRouteMetadataContext();
   return (
     <div>
-      <Button
-        variant="contained"
-        component={NavLink}
-        to={ctx.getPreviousPath()}>
-        Back
-      </Button>
       <Typography variant="h3">Discrete Math</Typography>
       <Typography variant="subtitle1">
-        Category: {ctx.category?.name}
+        Category: <Breadcrumbs aria-label="breadcrumb">
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="http://localhost:5173/category/0/subject/0">Subjects</NavLink>
+      </Breadcrumbs>
       </Typography>
-      <Typography variant="subtitle1">Subject: {ctx.subject?.title}</Typography>
       {!!ctx.subject?.topics?.length && (
         <>
-          <Typography variant="subtitle1">Topics:</Typography>
           <Grid container spacing={1}>
             {ctx.subject?.topics?.map((t, si) => (
-              <Grid item lg={4} sm={4} xs={12} >
+              <Grid item md={6} xs={12} key={si}>
                 <Card variant="outlined" style={{height: '100%'}}>
                   <CardContent>
-                    <Typography variant='h6' gutterBottom>
+                    <Typography variant='h6'                        >
                         {t.name}
                     </Typography>
                     <ul style={{listStyleType: "none"}}>
