@@ -6,19 +6,15 @@ import { useState } from 'react';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
-// console.log(import.meta.env);
+pdfjs.GlobalWorkerOptions.workerSrc = `${
+  import.meta.env.BASE_URL
+}pdf.worker.min.js`;
 
+console.log(pdfjs.GlobalWorkerOptions.workerSrc);
 const Topic = () => {
   const ctx = useRouteMetadataContext();
   const [numPages, setNumPages] = useState<number>();
   const [pageNumber, setPageNumber] = useState<number>(1);
-
-  // pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  //   'pdfjs-dist/legacy/build/pdf.worker.min.js',
-  //   import.meta.url,
-  // ).toString();
-
-  pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
 
   function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
     setNumPages(numPages);
@@ -41,7 +37,9 @@ const Topic = () => {
       {ctx.topic?.assetUrl && (
         // <Typography>Render PDF {ctx.topic?.assetUrl}</Typography>
         <div>
-          <Document file={ctx.topic?.assetUrl} onLoadSuccess={onDocumentLoadSuccess}>
+          <Document
+            file={`${import.meta.env.BASE_URL}${ctx.topic?.assetUrl}`}
+            onLoadSuccess={onDocumentLoadSuccess}>
             <Page pageNumber={1} />
           </Document>
           <p>
