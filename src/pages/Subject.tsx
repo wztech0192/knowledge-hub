@@ -20,7 +20,7 @@ const Subject = () => {
               <Grid item md={6} xs={12} key={si}>
                 <Card variant="outlined" style={{height: '100%'}}>
                   <CardContent>
-                    <Typography variant='h6'                        >
+                    <Typography variant='h6'>
                         {t.name}
                     </Typography>
                     <ul style={{listStyleType: "none"}}>
@@ -37,13 +37,6 @@ const Subject = () => {
               </Grid>
             ))}
           </Grid>
-          {/* <ol>
-            {ctx.subject?.topics?.map((t, i) => (
-              <li key={i}>
-                <NavLink to={ctx.getNextPath(`topic/${i}`)}>{t.name}</NavLink>
-              </li>
-            ))}
-          </ol> */}
         </>
       )}
     </div>

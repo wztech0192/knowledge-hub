@@ -18,15 +18,15 @@
                 },
                 {
                   "name": "Truth Tables",
-                  "assetUrl": "https://drive.google.com/file/d/1BGta1U7MQ7BKWhM7Sn56HDYD2LqvBiRu/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/01_logic_02_truth_table.pdf"
                 },
                 {
                   "name": "Tautology and Equivalence",
-                  "assetUrl": "https://drive.google.com/file/d/1VCjSL4eWP3b8sYcvNLxYkVLS4taDuXCp/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/01_logic_03_tautology_equivalence.pdf"
                 },
                 {
                   "name": "De Morgan's Law",
-                  "assetUrl": "https://drive.google.com/file/d/1b_2mMYEXNRnIofvt0krjkDml6WegWY48/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/01_logic_04_de_morgan.pdf"
                 }
               ]
             },
@@ -35,19 +35,19 @@
               "subtopics": [
                 {
                   "name": "Definition",
-                  "assetUrl": "https://drive.google.com/file/d/1owB0arLetrMQkV2qEia3ZfgEFV3mvA1R/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/02_set_theory_01_definition.pdf"
                 },
                 {
                   "name": "Subset-PowerSet",
-                  "assetUrl": "https://drive.google.com/file/d/16fWYMWuB9V1cUnb5luZif1J_KqWjZXFy/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/02_set_theory_02_subset_power_set.pdf"
                 },
                 {
                   "name": "Set Operatiosn",
-                  "assetUrl": "https://drive.google.com/file/d/1HtXJqNyJmlR5mqGLB0lu_Hkyly7IyTot/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/02_set_theory_03_set_operations.pdf"
                 },
                 {
                   "name": "Set Identities",
-                  "assetUrl": "https://drive.google.com/file/d/1aIwCsnjG8MOw-R20S4Iql-sPpVrdJCRF/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/02_set_theory_04_set_identities.pdf"
                 }
               ]
             },
@@ -56,19 +56,19 @@
               "subtopics": [
                 {
                   "name": "Pie 1",
-                  "assetUrl": "https://drive.google.com/file/d/1yJN5ml1oFnJI0eE8nzCaekDIQ5f_Xrce/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/03_counting_methods_01_pie.pdf"
                 },
                 {
                   "name": "Pie 2",
-                  "assetUrl": "https://drive.google.com/file/d/1xbDbd_o7lkvjVJ_fxhSMVRW-MZ4y9mCO/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/03_counting_methods_02_pie.pdf"
                 },
                 {
                   "name": "Product Rule 1",
-                  "assetUrl": "https://drive.google.com/file/d/1vPpQQoEdicfYNTHtwAhzbar5jCkR6Cd2/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/03_counting_methods_03_product_rule.pdf"
                 },
                 {
                   "name": "Product Rule 2",
-                  "assetUrl": "https://drive.google.com/file/d/16kd-oGiO4Y6SnWH9hQMiNd1g5nGfmkNw/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/03_counting_methods_04_product_rule.pdf"
                 }
               ]
             },
@@ -77,19 +77,19 @@
               "subtopics": [
                 {
                   "name": "Permutations",
-                  "assetUrl": "https://drive.google.com/file/d/1j7kQaqn4_sHbATUj44m9037IsbO9Fzxk/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/04_counting_methods_01_permutation.pdf"
                 },
                 {
                   "name": "Combinations",
-                  "assetUrl": "https://drive.google.com/file/d/1AHszKeKcJoN0_Ljz2dtI34vVSo4EsGfW/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/04_counting_methods_02_combination.pdf"
                 },
                 {
                   "name": "Examples",
-                  "assetUrl": "https://drive.google.com/file/d/1oCnJexnjsNm9Q7R8ZXVyvJ6f0xC0vy7e/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/04_counting_methods_03_examples.pdf"
                 },
                 {
                   "name": "Identities",
-                  "assetUrl": "https://drive.google.com/file/d/1roMBo9twpc9piyW0uuJHfTigfwgSzaNm/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/04_counting_methods_04_identities.pdf"
                 }
               ]
             },
@@ -98,19 +98,19 @@
               "subtopics": [
                 {
                   "name": "Divisibility",
-                  "assetUrl": "https://drive.google.com/file/d/1p8MhUCw4GztnOkjZMkI14hm5f7yRY0c0/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/05_01_divisibilty.pdf"
                 },
                 {
                   "name": "Primes",
-                  "assetUrl": "https://drive.google.com/file/d/1KmStJHf5himq-9lAdGpdaTLX056ehB4b/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/05_02_primes.pdf"
                 },
                 {
                   "name": "GCD And LCM",
-                  "assetUrl": "https://drive.google.com/file/d/1_FQ9Ie-kDbt3-TLMRdPDmGESOEVSkbHp/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/05_03_gcd_lcm.pdf"
                 },
                 {
                   "name": "Algorithm for GCD",
-                  "assetUrl": "https://drive.google.com/file/d/1blA7DAlu3M3lPWRqGGKrAoGmi-0THpk2/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/05_04_algorithm_gcd.pdf"
                 }
               ]
             },
@@ -119,19 +119,19 @@
               "subtopics": [
                 {
                   "name": "Pigeonhole Principle 1",
-                  "assetUrl": "https://drive.google.com/file/d/11RMBvFH6MH8p2vHtHizum8DggnV61xJT/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/06_01_pigeonhole_principle.pdf"
                 },
                 {
                   "name": "Pigeonhole Principle 2",
-                  "assetUrl": "https://drive.google.com/file/d/10k6KRLGRLC005i0HGrh89V8Vu1fVHkle/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/06_02_pigeonhole_principle.pdf"
                 },
                 {
                   "name": "Application 1",
-                  "assetUrl": "https://drive.google.com/file/d/1KMOrr0FbXkDuKA54ihvFLul5mvCsqqok/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/06_03_the_applications_of_pigeonhole_principle.pdf"
                 },
                 {
                   "name": "Application 2",
-                  "assetUrl": "https://drive.google.com/file/d/1UMe_xLwoWpR9uIcTndlcVQG2T5hhksBr/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/06_04_the_applications_of_pigeonhole_principle.pdf"
                 }
               ]
             },
@@ -140,11 +140,11 @@
               "subtopics": [
                 {
                   "name": "Definitions",
-                  "assetUrl": "https://drive.google.com/file/d/1IMHMlz2nflF1KOZYdo6V4-zMcK3VPzkD/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/07_01_terminology_in_matrices.pdf"
                 },
                 {
                   "name": "Operations",
-                  "assetUrl": "https://drive.google.com/file/d/1xxoT2PegTCgisUnnraO8bT7Tz_S74mEo/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/07_02_matrix_operations.pdf"
                 }
               ]
             },
@@ -153,19 +153,19 @@
               "subtopics": [
                 {
                   "name": "Relations",
-                  "assetUrl": "https://drive.google.com/file/d/1nse9GVc47y_HQ0fFpp9PXO7Kkl9CMw4A/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/08_01_introduction_to_relations.pdf"
                 },
                 {
                   "name": "Equivalence Relations",
-                  "assetUrl": "https://drive.google.com/file/d/1uG87GJ0apn8CJNIpQlYurAcS9hB7SvHH/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/08_02_equivalence_relations.pdf"
                 },
                 {
                   "name": "Equivalence Relations and Partitions",
-                  "assetUrl": "https://drive.google.com/file/d/1vFJ9wbRqixCfs_YxsHA5jZV3ET8yty50/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/08_03_equivalence_relations_and_partitions.pdf"
                 },
                 {
                   "name": "Relation Representations",
-                  "assetUrl": "https://drive.google.com/file/d/1sYaMump6NGE1dW_VK94EoLke81scyXCu/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/08_04_the_representations_of_relations.pdf"
                 }
               ]
             },
@@ -174,19 +174,19 @@
               "subtopics": [
                 {
                   "name": "Mathematical Induction 1",
-                  "assetUrl": "https://drive.google.com/file/d/10Lxprfffkyev7ZdGafXaLMPJzuzj10dG/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/09_01_mathematical_induction.pdf"
                 },
                 {
                   "name": "Mathematical Induction 2",
-                  "assetUrl": "https://drive.google.com/file/d/1fHAOOwMPRmP9XOCPFNEBqaEbVn8Dw_ud/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/09_02_mathematical_induction.pdf"
                 },
                 {
                   "name": "Mathematical Induction 3",
-                  "assetUrl": "https://drive.google.com/file/d/1OXXHMNENz1j_XG9_WEAURONsDpNl6U_M/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/09_03_mathematical_induction.pdf"
                 },
                 {
                   "name": "Mathematical Induction 4",
-                  "assetUrl": "https://drive.google.com/file/d/1k64MrqVkmiyf9D7ZKuuLC1x57zmMcx4h/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/09_04_mathematical_induction.pdf"
                 }
               ]
             },
@@ -195,11 +195,11 @@
               "subtopics": [
                 {
                   "name": "Recursive Sequences 1",
-                  "assetUrl": "https://drive.google.com/file/d/1NrKpTQ6yW_3LE_dXSjXjvdHCqYqqxYdD/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/10_01_sequences.pdf"
                 },
                 {
                   "name": "Recursive Sequences 2",
-                  "assetUrl": "https://drive.google.com/file/d/19y_NbRnCJU1BWpqMS7jgFXq7e4yZjJ1F/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/10_02_sequences.pdf"
                 }
               ]
             },
@@ -208,19 +208,19 @@
               "subtopics": [
                 {
                   "name": "Graphs",
-                  "assetUrl": "https://drive.google.com/file/d/1-q0lVQNzOPoB8qmogagUA6b6V9unl3s0/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/11_01_introduction_to_graphs.pdf"
                 },
                 {
                   "name": "The Handshaking Theorem",
-                  "assetUrl": "https://drive.google.com/file/d/19rjlkzGgmHfGDWlrk2ZpSm_IVC2NFR-s/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/11_02_the_handshaking_theorem.pdf"
                 },
                 {
                   "name": "Trees",
-                  "assetUrl": "https://drive.google.com/file/d/1s9pxYH9wnMBJ1x1xAMMxMc2ktZ8GF8F5/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/11_03_trees.pdf"
                 },
                 {
                   "name": "Eulerian And Hamiltonian Graphs",
-                  "assetUrl": "https://drive.google.com/file/d/13o7UuHEVyeBPY3QcsQuQJVD6KrQEWkAy/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/11_04_eulerian_hamiltonian.pdf"
                 }
               ]
             },
@@ -229,19 +229,19 @@
               "subtopics": [
                 {
                   "name": "Sample Spaces And Events And Probability",
-                  "assetUrl": "https://drive.google.com/file/d/1o6EAjJuMEa26MymQUjaUCyAawAYaAl5B/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/12_1_sample_spaces_events_probability.pdf"
                 },
                 {
                   "name": "Conditional Probability And Independence Of Events",
-                  "assetUrl": "https://drive.google.com/file/d/1tTEpfLtmKMuA7o_eYXslRNIAyjE2UFeT/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/12_2_conditional_probability_and_independence_of_events.pdf"
                 },
                 {
                   "name": "Examples",
-                  "assetUrl": "https://drive.google.com/file/d/1LOUS60TlcZvp8p7ANWDMlD1P3yLnSssD/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/12_03_additional_examples.pdf"
                 },
                 {
                   "name": "Total Probability And Bayes Theorem",
-                  "assetUrl": "https://drive.google.com/file/d/1Yr8EyvBr5OLi_Xlxpo4_OO6Wj1hWxqhI/view?usp=sharing"
+                  "assetUrl": "resources/pdffiles/discretemath/12_4_law_of_total_probability_and_theorem_of_bayes.pdf"
                 }
               ]
             }

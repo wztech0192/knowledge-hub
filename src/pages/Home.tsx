@@ -57,9 +57,13 @@ export const Home = () => {
                               logical reasoning and proof techniques to solve
                               problems efficiently.
                             </Typography>
-                            <Button variant="outlined" size="medium">
+                            <Typography
+                              variant="button"
+                              color="primary"
+                              style={{ marginTop: '10px', display: 'block' }}
+                            >
                               Learn More
-                            </Button>
+                            </Typography>
                           </CardContent>
                         </CardActionArea>
                       </Card>
