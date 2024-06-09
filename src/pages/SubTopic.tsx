@@ -1,12 +1,20 @@
 import useRouteMetadataContext from '@/hooks/useRouteMetadataContext';
-import { Breadcrumbs, Button, Typography } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import {
+  Breadcrumbs,
+  FormControl,
+  InputLabel,
+  Menu,
+  MenuItem,
+  Typography,
+} from '@mui/material';
+import { NavLink, Path } from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { useCallback, useState } from 'react';
 import { useResizeObserver } from '@wojtekmaj/react-hooks';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import '../assets/css/index.scss';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `${
   import.meta.env.BASE_URL
@@ -19,16 +27,15 @@ const Topic = () => {
 
   type PDFFile = string | File | null;
 
-
   const ctx = useRouteMetadataContext();
-  const [file, setFile] = useState<PDFFile>(
+  const [file] = useState<PDFFile>(
     `${import.meta.env.BASE_URL}${ctx.topic?.assetUrl}`,
   );
 
   const [numPages, setNumPages] = useState<number>();
-  const [pageNumber, setPageNumber] = useState<number>(1);
   const [containerRef, setContainerRef] = useState<HTMLElement | null>(null);
   const [containerWidth, setContainerWidth] = useState<number>();
+  const [path, setPath] = useState(ctx.getTopicPath());
 
   const onResize = useCallback<ResizeObserverCallback>(entries => {
     const [entry] = entries;
@@ -40,49 +47,15 @@ const Topic = () => {
 
   useResizeObserver(containerRef, resizeObserverOptions, onResize);
 
-  function onFileChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    const { files } = event.target;
-    
-
-    const nextFile = files?.[0];
-
-    if (nextFile) {
-      setFile(nextFile);
-    }
-  }
-
-
   function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
     setNumPages(numPages);
   }
 
-  function pageForward() {
-    if (typeof numPages === 'number' && pageNumber >= numPages) {
-      return;
-    } else {
-      setPageNumber(pageNumber + 1);
-    }
-  }
-
-  function pageBackward() {
-    if (typeof numPages === 'number' && pageNumber <= 1) {
-      return;
-    }
-
-    if (pageNumber > 1) {
-      setPageNumber(pageNumber - 1);
-    }
-  }
-
-  function topicForward(){
-    //logic for topic forward
-    // <NavLink to={ctx.getNextPath(`topic/${ctx.subjectId}/${ctx.subjectId + 1}`)} />
-
-  }
-
-  function topicBackward(){
+  const handleTopicChange = (event: SelectChangeEvent) => {
+    console.log(event.target);
+    setPath(event.target.value);
     
-  }
+  };
 
   return (
     <div>
@@ -91,19 +64,24 @@ const Topic = () => {
         Category:
         <Breadcrumbs aria-label="breadcrumb">
           <NavLink to="/">Home</NavLink>
-          <NavLink to="http://localhost:5173/category/0/subject/0">
-            Subjects
-          </NavLink>
+          <NavLink to={ctx.getSubjectPath()}>Subjects</NavLink>
           <NavLink to={ctx.pathname}>{ctx.topic?.name}</NavLink>
         </Breadcrumbs>
-        <div className='topic-controls'>
-          <Button onClick={topicBackward}>{'<'}</Button>
-          <div className="page-controls">
-            <Button onClick={pageBackward}>{'<'}</Button>
-            <span>{ctx.topic?.name}</span>
-            <Button onClick={pageForward}>{'>'}</Button>
-          </div>
-          <Button onClick={topicForward}>{'>'}</Button>
+        <div className="topic-controls">
+          <FormControl fullWidth>
+            <InputLabel id="topic-select-label">Topic</InputLabel>
+            <Select
+              labelId="topic-select-label"
+              id="topic-select"
+              value={path}
+              label="Topic"
+              onChange={handleTopicChange}>
+              {ctx.topic?.subtopics?.map((subtopic, subIndex) =>(
+                <MenuItem value={subtopic.name}>1</MenuItem>
+              ))}
+              {/* <MenuItem><NavLink to={ctx.pathname}>{ctx.getTopicPath()}</NavLink></MenuItem> */}
+            </Select>
+          </FormControl>
         </div>
       </Typography>
       <hr />
@@ -112,13 +90,17 @@ const Topic = () => {
           // <Typography>Render PDF {ctx.topic?.assetUrl}</Typography>
           <div className="pdf-container-document" ref={setContainerRef}>
             <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
-              <Page
-                className="fonts"
-                pageNumber={pageNumber}
-                width={
-                  containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth
-                }
-              />
+              {Array.from(new Array(numPages), (el, index) => (
+                <Page
+                  key={`page_${index + 1}`}
+                  pageNumber={index + 1}
+                  width={
+                    containerWidth
+                      ? Math.min(containerWidth, maxWidth)
+                      : maxWidth
+                  }
+                />
+              ))}
             </Document>
           </div>
         )}

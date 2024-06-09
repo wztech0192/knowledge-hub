@@ -141,7 +141,7 @@ body{
 
 }
 
-.page-controls{
+.topic-controls{
   width: 50%;
   padding: 10px;
   margin: 0 auto;
@@ -152,9 +152,6 @@ body{
   align-items: center;
 }
 
-.page-controls button{
-  padding: 10px;
-}
 
 .pdf-container{
   display: flex;
@@ -168,14 +165,4 @@ body{
   width: 100%;
   max-width: calc(100% - 2em);
   margin: 1em 0;
-}
-
-.fonts{
-  width: 100%;
-  max-width: calc(100% - 2em);
-  margin: 1em 0;
-}
-
-.topic-controls{
-  display: flex;
 }
