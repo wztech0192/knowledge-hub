@@ -2,7 +2,6 @@ import useRouteMetadataContext from '@/hooks/useRouteMetadataContext';
 import {
   Breadcrumbs,
   FormControl,
-  InputLabel,
   MenuItem,
   Typography,
 } from '@mui/material';
