@@ -7,6 +7,11 @@ body{
   font-family: 'Exo', sans-serif;
 }
 
+hr{
+  height: 2px;
+  background: 1px solid black;
+}
+
 .area{
   position: fixed;
   background: #E2DFD0;  
@@ -141,24 +146,12 @@ body{
 
 }
 
-.topic-controls{
-  width: 50%;
-  padding: 10px;
-  margin: 0 auto;
-  background: rgba(253, 126, 0, 0.57);
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  align-items: center;
-}
 
 
 .pdf-container{
   display: flex;
   flex-direction: column;
   align-items: center;
-  // margin: 10px 0;
-  // padding: 10px;
 }
 
 .pdf-container-document{

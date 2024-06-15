@@ -27,7 +27,7 @@ const Topic = () => {
 
   const ctx = useRouteMetadataContext();
 
-  const currentTopicId = ctx.topicIds?.at(-1)?.toString(); // get current topic id
+  const currentTopicId = ctx.topicIds?.at(-1)?.toString(); // get current topi id
   const parentTopic = ctx.topicHierarchy?.at(-2); // get parent topic
 
   const [numPages, setNumPages] = useState<number>();
@@ -60,25 +60,20 @@ const Topic = () => {
         <Breadcrumbs aria-label="breadcrumb">
           <NavLink to="/">Home</NavLink>
           <NavLink to={ctx.getSubjectPath()}>Subjects</NavLink>
-          <NavLink to={ctx.pathname}>{ctx.topic?.name}</NavLink>
+          <FormControl size='small'>
+            <Select
+              labelId="topic-select-label"
+              id="topic-select"
+              value={currentTopicId ?? ''}
+              onChange={handleTopicChange}>
+              {parentTopic?.subtopics?.map((subtopic, topicId) => (
+                <MenuItem key={topicId} value={topicId}>
+                  {subtopic.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Breadcrumbs>
-        {parentTopic?.subtopics?.length && (
-          <div className="topic-controls">
-            <FormControl fullWidth>
-              <InputLabel id="topic-select-label">Topic</InputLabel>
-              <Select
-                labelId="topic-select-label"
-                id="topic-select"
-                value={currentTopicId ?? ''}
-                label="Topic"
-                onChange={handleTopicChange}>
-                {parentTopic?.subtopics?.map((subtopic, topicId) => (
-                  <MenuItem value={topicId}>{subtopic.name}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-        )}
       </Typography>
       <hr />
       <div className="pdf-container">
