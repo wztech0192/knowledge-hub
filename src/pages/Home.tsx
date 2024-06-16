@@ -1,6 +1,6 @@
 import { useMetadata } from '@/providers/MetadataContextProvider';
 import {
-  Container, 
+  Container,
   Grid,
   Typography,
   Box,
@@ -25,31 +25,37 @@ export const Home = () => {
             </Typography>
           </div>
         ))}
-        <Grid container spacing={3} key={"false"}>
+        <Grid container spacing={3} key={'false'}>
           <Grid item xs={12}>
             {metadata.categories.map((c, ci) => (
               <div key={ci} style={{ margin: '10px 0' }}>
                 {c.subjects.map((s, si) => {
                   return (
-                    <NavLink
-                      to={`/category/${si}/subject/${si}`}
-                      style={{
-                        textDecoration: 'none',
-                      }}
-                      key={si}>
-                      <Card variant="outlined">
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            alt="Hot Air Baloon"
-                            height="210"
-                            image={airballon}
-                          />
+                    <Card variant="outlined">
+                      <CardActionArea>
+                        <CardMedia
+                          component="img"
+                          alt="Hot Air Baloon"
+                          height="210"
+                          image={airballon}
+                        />
+                        <NavLink
+                          to={`/category/${si}/subject/${si}`}
+                          style={{
+                            textDecoration: 'none',
+                          }}
+                          key={si}>
                           <CardContent>
-                            <Typography variant="h4" color="text.primary" gutterBottom>
+                            <Typography
+                              variant="h4"
+                              color="text.primary"
+                              gutterBottom>
                               {s.title}
                             </Typography>
-                            <Typography variant="body1" color="text.secondary" gutterBottom>
+                            <Typography
+                              variant="body1"
+                              color="text.secondary"
+                              gutterBottom>
                               Discrete math deals with distinct, separate values
                               and structures like sets, functions, and graphs.
                               It's crucial in computer science, focusing on
@@ -57,16 +63,27 @@ export const Home = () => {
                               problems efficiently.
                             </Typography>
                             <Typography
+                              component='a'
+                              href={`/category/${si}/subject/${si}`}
                               variant="button"
                               color="primary"
-                              style={{ marginTop: '10px', display: 'block' }}
-                            >
+                              sx={{
+                                marginTop: '10px',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                backgroundColor: 'black',
+                                maxWidth: '40%',
+                                padding: '10px',
+                                borderRadius: '20px',
+                                color: 'white',
+                                textDecoration: 'none',
+                              }}>
                               Learn More
                             </Typography>
                           </CardContent>
-                        </CardActionArea>
-                      </Card>
-                    </NavLink>
+                        </NavLink>
+                      </CardActionArea>
+                    </Card>
                   );
                 })}
               </div>

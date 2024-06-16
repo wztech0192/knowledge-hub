@@ -9,13 +9,13 @@ export class RouteMetadataContext {
   readonly subjectId: number;
   readonly topicIds: number[];
 
-//   // current category
+  // current category
   readonly category: Category | null;
-//   // current subject
+  // current subject
   readonly subject: Subject | null;
-//   // current topic
+  // current topic
   readonly topic: Topic | null;
-//   // The hierarchy of topics leading to the current t.opic. The last element is the current topic
+  // The hierarchy of topics leading to the current t.opic. The last element is the current topic
   readonly topicHierarchy: Topic[];
 
   constructor(
