@@ -15,7 +15,7 @@ export class RouteMetadataContext {
   readonly subject: Subject | null;
   // current topic
   readonly topic: Topic | null;
-  // The hierarchy of topics leading to the current topic. The last element is the current topic.
+  // The hierarchy of topics leading to the current t.opic. The last element is the current topic
   readonly topicHierarchy: Topic[];
 
   constructor(
@@ -29,33 +29,34 @@ export class RouteMetadataContext {
     this.categoryId = parseInt(categoryIdParam ?? '');
     this.subjectId = parseInt(subjectIdParam ?? '');
     this.topicIds = topicIdsParam.split('/').map(i => parseInt(i)) ?? [];
-    console.log(this.topicIds);
-
-    // assign the current category and subject
+    
+// assign the current category and subject
     this.category = metadata.categories[this.categoryId] ?? null;
     this.subject = this.category?.subjects[this.subjectId] ?? null;
     this.topic = null;
     this.topicHierarchy = [];
 
-    // assign the current topic and topic hierarchy if the subject and topic indexes are valid
+    //assign the current topic and topic hierarchy if the subject and topic indexes are valid
     if (this.subject && this.topicIds.length > 0) {
       let topicsToPick = this.subject.topics;
-
       this.topicHierarchy = [];
       for (const idx of this.topicIds) {
         const topic = topicsToPick[idx];
+        
         if (!topic) {
           break;
         }
 
         this.topicHierarchy.push(topic);
-
+        
         if (!topic.subtopics) {
           break;
         }
 
         topicsToPick = topic.subtopics;
       }
+    
+      
 
       if (this.topicHierarchy.length === this.topicIds.length) {
         // assign the last topic in the hierarchy as the current topic
@@ -100,7 +101,6 @@ const useRouteMetadataContext = () => {
   const metadata = useMetadata();
   const { categoryId, subjectId, ['*']: topicIds } = useParams();
   const { pathname } = useLocation();
-
   return useMemo(
     () =>
       new RouteMetadataContext(

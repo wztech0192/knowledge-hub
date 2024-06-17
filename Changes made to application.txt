@@ -1,3 +1,7 @@
-changed the name from Topic to SubTopic for the Topic file.
-Change the route from /category/:categoryId/subject/:subjectId/topic/* to /category/:categoryId/subject/:subjectId/topic/:topicId/subtopic/:subTopicId.
-Removed some warnings.
+Issue 3
+
+1. User will be able to see the pdf Files
+2. Did modification to the UI for the subject Page
+3. Did some tweaking to change the size of the input of the search bar
+4. Changed some CSS to make the background standout a bit
+5. 

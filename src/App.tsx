@@ -31,7 +31,7 @@ const router = createBrowserRouter(
           element: <Subject />,
         },
         {
-          path: '/category/:categoryId/subject/:subjectId/topic/:topicId/subtopic/:subTopicId',
+          path: '/category/:categoryId/subject/:subjectId/topic/*',
           element: <SubTopic />,
         },
       ],
