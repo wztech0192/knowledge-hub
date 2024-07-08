@@ -6,6 +6,6 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig(({ mode }) => {
   return {
     plugins: [react(), tsconfigPaths()],
-    base: mode === 'production' ? '/knowledge-hub' : '/',
+    base: mode === 'production' ? '/knowledge-hub/' : '/',
   };
 });
