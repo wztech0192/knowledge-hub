@@ -47,7 +47,7 @@ export class RouteMetadataContext {
           break;
         }
 
-        this.topicHierarchy.push(topic);
+        this.topicHierarchy.push(topic); 
         
         if (!topic.subtopics) {
           break;
