@@ -31,7 +31,7 @@ export const Home = () => {
               <div key={ci} style={{ margin: '10px 0' }}>
                 {c.subjects.map((s, si) => {
                   return (
-                    <Card variant="outlined">
+                    <Card variant="outlined" key={si}>
                       <CardActionArea>
                         <CardMedia
                           component="img"
@@ -63,8 +63,6 @@ export const Home = () => {
                               problems efficiently.
                             </Typography>
                             <Typography
-                              component='a'
-                              href={`/category/${si}/subject/${si}`}
                               variant="button"
                               color="primary"
                               sx={{

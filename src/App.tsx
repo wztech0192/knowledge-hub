@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { CustomThemeProvider } from './providers/CustomThemeProvider';
 import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
-import { PlaceholderPage } from './pages/PlaceholderPage';
 import { MetadataContextProvider } from './providers/MetadataContextProvider';
 import Subject from './pages/Subject';
 import SubTopic from './pages/SubTopic';
@@ -21,10 +20,6 @@ const router = createBrowserRouter(
         {
           path: '/',
           element: <Home />,
-        },
-        {
-          path: '/placeholder/:id',
-          element: <PlaceholderPage />,
         },
         {
           path: '/category/:categoryId/subject/:subjectId',
