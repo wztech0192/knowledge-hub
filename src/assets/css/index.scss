@@ -8,8 +8,11 @@ body{
 }
 
 hr{
-  height: 2px;
-  background: 1px solid black;
+  border-color: black;
+  border-bottom: none;
+  border-style: dashed;
+  border-width: 2px;
+  margin-bottom: 20px;
 }
 
 .pdf-container{

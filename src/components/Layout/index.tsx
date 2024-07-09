@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Header } from './Header';
 import { Box, Container } from '@mui/material';
-import '../../assets/css/index.scss';
+import '@/assets/css/index.scss';
 
 export const Layout = () => {
   

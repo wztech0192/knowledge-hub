@@ -1,15 +1,16 @@
 import useRouteMetadataContext from '@/hooks/useRouteMetadataContext';
-import { Breadcrumbs, FormControl, MenuItem, Typography } from '@mui/material';
+import { FormControl, MenuItem, Typography } from '@mui/material';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { useCallback, useState } from 'react';
 import { useResizeObserver } from '@wojtekmaj/react-hooks';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import '../assets/css/index.scss';
+import '@/assets/css/index.scss';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Carousel from 'react-material-ui-carousel';
 import { Paper } from '@mui/material';
+import { BreadCrumbs } from './Subject';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `${
   import.meta.env.BASE_URL
@@ -58,7 +59,7 @@ const Topic = () => {
         <>
           <Typography variant="subtitle1">
             <b>Category:</b>
-            <Breadcrumbs aria-label="breadcrumb">
+            <BreadCrumbs aria-label="breadcrumb">
               <NavLink to="/">Home</NavLink>
               <NavLink to={ctx.getSubjectPath()}>Subjects</NavLink>
               <FormControl size="small">
@@ -74,7 +75,7 @@ const Topic = () => {
                   ))}
                 </Select>
               </FormControl>
-            </Breadcrumbs>
+            </BreadCrumbs>
           </Typography>
           <hr />
           <Carousel>
@@ -103,7 +104,7 @@ const Topic = () => {
           <Typography variant="h3">{parentTopic?.name}</Typography>
           <Typography variant="subtitle1">
             Category:
-            <Breadcrumbs aria-label="breadcrumb">
+            <BreadCrumbs aria-label="breadcrumb">
               <NavLink to="/">Home</NavLink>
               <NavLink to={ctx.getSubjectPath()}>Subjects</NavLink>
               <FormControl size="small">
@@ -119,7 +120,7 @@ const Topic = () => {
                   ))}
                 </Select>
               </FormControl>
-            </Breadcrumbs>
+            </BreadCrumbs>
           </Typography>
           <hr />
           <div className="pdf-container">

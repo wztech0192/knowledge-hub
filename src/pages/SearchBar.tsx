@@ -10,11 +10,16 @@ interface OptionObject {
 }
 
 export const StyledTextField = styled(TextField)(({ theme }) => ({
-  color: 'inherit',
-
+  color: "inherit",
   // vertical padding + font size from searchIcon
   // paddingLeft: `calc(1em + ${theme.spacing(4)})`,
   transition: theme.transitions.create('width'),
+  '& .MuiInputBase-input':{
+    color: "white",
+  },
+  '& .MuiInputLabel-root':{
+    color: "white",
+  }
 }));
 
 export const SearchBar = () => {
