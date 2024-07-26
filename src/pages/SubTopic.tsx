@@ -1,8 +1,8 @@
 import useRouteMetadataContext from '@/hooks/useRouteMetadataContext';
 import { FormControl, MenuItem, Typography } from '@mui/material';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
-import { useCallback, useState } from 'react';
+import { SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
 import { useResizeObserver } from '@wojtekmaj/react-hooks';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
@@ -39,11 +39,31 @@ const Topic = () => {
     }
   }, []);
 
+  useEffect(() => {
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem('scrollPosition', window.scrollY.toString());
+    });
+  }, []); 
+
+  // useEffect(() => {
+  //   window.addEventListener("onload", () => {
+  //     localStorage.getItem('')
+  //   })
+  // })
+
   useResizeObserver(containerRef, resizeObserverOptions, onResize);
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
-  };
+    setTimeout(() => {
+      const lastScrolledPosition = localStorage.getItem('scrollPosition');
+      if (lastScrolledPosition) {
+        console.log(lastScrolledPosition);
+        window.scrollTo(0, parseInt(lastScrolledPosition, 10));
+      }
+    }, 1000);
+
+    };
 
   const handleSubTopicChange = (event: SelectChangeEvent) => {
     navigate(`${ctx.getPreviousPath()}/${event.target.value}`);
@@ -87,13 +107,8 @@ const Topic = () => {
                   style={{
                     height: '500px',
                     width: '50%',
-                    margin: '0 auto',
-                    backgroundColor: '#FFA38F',
-                    borderRadius: '60px',
                   }}>
-                  <h1 style={{display: 'flex',
-                    justifyContent: 'center'}}
-                    key={subtopicId}>{subtopic.name}</h1>
+                  <h1 key={subtopicId}>{subtopic.name}</h1>
                 </Paper>
               ))}
           </Carousel>
@@ -123,26 +138,31 @@ const Topic = () => {
             </BreadCrumbs>
           </Typography>
           <hr />
-          <div className="pdf-container">
+          <div className="pdf-container" ref={setContainerRef}>
             {ctx.topic?.assetUrl && (
-              // <Typography>Render PDF {ctx.topic?.assetUrl}</Typography>
-              <div className="pdf-container-document" ref={setContainerRef}>
-                <Document
-                  file={`${import.meta.env.BASE_URL}${ctx.topic?.assetUrl}`}
-                  onLoadSuccess={onDocumentLoadSuccess}>
-                  {Array.from(new Array(numPages), (_, index) => (
-                    <Page
-                      key={`page_${index + 1}`}
-                      pageNumber={index + 1}
-                      width={
-                        containerWidth
-                          ? Math.min(containerWidth, maxWidth)
-                          : maxWidth
-                      }
-                    />
-                  ))}
-                </Document>
-              </div>
+              <Document
+                file={`${import.meta.env.BASE_URL}${ctx.topic?.assetUrl}`}
+                onLoadSuccess={onDocumentLoadSuccess}>
+                {Array.from(new Array(numPages), (_, index) => (
+                  <Page
+                    key={`page_${index + 1}`}
+                    pageNumber={index + 1}
+                    width={
+                      containerWidth
+                        ? Math.min(containerWidth, maxWidth)
+                        : maxWidth
+                    }
+                    canvasBackground="#FEF3E2"
+                    onRenderSuccess={() => {
+                      window.addEventListener("onload", () => {
+                        const scrollPos = localStorage.getItem("scrollPosition");
+                        containerRef?.scrollTo(0, parseFloat(scrollPos!));
+                      })
+                      // containerRef?.scrollIntoView({behavior: "smooth"});
+                    }}
+                  />
+                ))}
+              </Document>
             )}
           </div>
         </>
