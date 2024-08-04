@@ -1,8 +1,8 @@
 import useRouteMetadataContext from '@/hooks/useRouteMetadataContext';
 import { FormControl, MenuItem, Typography } from '@mui/material';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
-import { SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useResizeObserver } from '@wojtekmaj/react-hooks';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
@@ -28,8 +28,9 @@ const Topic = () => {
   const parentTopic = ctx.topicHierarchy?.at(-2); // get parent topic
 
   const [numPages, setNumPages] = useState<number>();
-  const [containerRef, setContainerRef] = useState<HTMLElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerWidth, setContainerWidth] = useState<number>();
+  // const location = useLocation();
 
   const onResize = useCallback<ResizeObserverCallback>(entries => {
     const [entry] = entries;
@@ -40,30 +41,29 @@ const Topic = () => {
   }, []);
 
   useEffect(() => {
-    window.addEventListener('beforeunload', () => {
-      localStorage.setItem('scrollPosition', window.scrollY.toString());
+    console.log(location.pathname);
+    containerRef.current?.addEventListener('scroll', () => {
+      localStorage.setItem(
+        `${location.pathname}_scrollPosition`,
+        containerRef.current?.scrollTop.toString()!,
+      );
     });
-  }, []); 
 
-  // useEffect(() => {
-  //   window.addEventListener("onload", () => {
-  //     localStorage.getItem('')
-  //   })
-  // })
+    return () => {
+      containerRef.current?.removeEventListener('scroll', () => {
+        localStorage.setItem(
+          `${location.pathname}_scrollPosition`,
+          containerRef.current?.scrollTop.toString()!,
+        );
+      });
+    };
+  });
 
-  useResizeObserver(containerRef, resizeObserverOptions, onResize);
+  useResizeObserver(containerRef.current, resizeObserverOptions, onResize);
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
-    setTimeout(() => {
-      const lastScrolledPosition = localStorage.getItem('scrollPosition');
-      if (lastScrolledPosition) {
-        console.log(lastScrolledPosition);
-        window.scrollTo(0, parseInt(lastScrolledPosition, 10));
-      }
-    }, 1000);
-
-    };
+  };
 
   const handleSubTopicChange = (event: SelectChangeEvent) => {
     navigate(`${ctx.getPreviousPath()}/${event.target.value}`);
@@ -138,7 +138,10 @@ const Topic = () => {
             </BreadCrumbs>
           </Typography>
           <hr />
-          <div className="pdf-container" ref={setContainerRef}>
+          <div
+            className="pdf-container"
+            ref={containerRef}
+            style={{ overflow: 'scroll', height: '100vh' }}>
             {ctx.topic?.assetUrl && (
               <Document
                 file={`${import.meta.env.BASE_URL}${ctx.topic?.assetUrl}`}
@@ -152,14 +155,17 @@ const Topic = () => {
                         ? Math.min(containerWidth, maxWidth)
                         : maxWidth
                     }
-                    canvasBackground="#FEF3E2"
                     onRenderSuccess={() => {
-                      window.addEventListener("onload", () => {
-                        const scrollPos = localStorage.getItem("scrollPosition");
-                        containerRef?.scrollTo(0, parseFloat(scrollPos!));
-                      })
-                      // containerRef?.scrollIntoView({behavior: "smooth"});
+                      const lastScrolledPosition =
+                        localStorage.getItem(`${location.pathname}_scrollPosition`);
+                      if (lastScrolledPosition) {
+                        containerRef.current?.scrollTo(
+                          0,
+                          parseInt(lastScrolledPosition, 10),
+                        );
+                      }
                     }}
+                    canvasBackground="#FEF3E2"
                   />
                 ))}
               </Document>
