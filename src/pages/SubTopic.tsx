@@ -1,5 +1,5 @@
 import useRouteMetadataContext from '@/hooks/useRouteMetadataContext';
-import { FormControl, MenuItem, Typography } from '@mui/material';
+import { Box, FormControl, MenuItem, Typography } from '@mui/material';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -11,10 +11,16 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Carousel from 'react-material-ui-carousel';
 import { Paper } from '@mui/material';
 import { BreadCrumbs } from './Subject';
+import styled from '@emotion/styled';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `${
   import.meta.env.BASE_URL
 }pdf.worker.min.js`;
+
+const StyledBoxComponent = styled(Box)(() => ({
+  overflow: 'scroll',
+  height: '100vh',
+}));
 
 const Topic = () => {
   const navigate = useNavigate();
@@ -31,6 +37,7 @@ const Topic = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerWidth, setContainerWidth] = useState<number>();
   // const location = useLocation();
+  const path = `${location.pathname}`;
 
   const onResize = useCallback<ResizeObserverCallback>(entries => {
     const [entry] = entries;
@@ -41,10 +48,9 @@ const Topic = () => {
   }, []);
 
   useEffect(() => {
-    console.log(location.pathname);
     containerRef.current?.addEventListener('scroll', () => {
       localStorage.setItem(
-        `${location.pathname}_scrollPosition`,
+        `knowledge_hub_${path}_scrollPosition`,
         containerRef.current?.scrollTop.toString()!,
       );
     });
@@ -52,7 +58,7 @@ const Topic = () => {
     return () => {
       containerRef.current?.removeEventListener('scroll', () => {
         localStorage.setItem(
-          `${location.pathname}_scrollPosition`,
+          `knowledge_hub_${path}_scrollPosition`,
           containerRef.current?.scrollTop.toString()!,
         );
       });
@@ -138,10 +144,7 @@ const Topic = () => {
             </BreadCrumbs>
           </Typography>
           <hr />
-          <div
-            className="pdf-container"
-            ref={containerRef}
-            style={{ overflow: 'scroll', height: '100vh' }}>
+          <StyledBoxComponent className="pdf-container" ref={containerRef}>
             {ctx.topic?.assetUrl && (
               <Document
                 file={`${import.meta.env.BASE_URL}${ctx.topic?.assetUrl}`}
@@ -156,12 +159,13 @@ const Topic = () => {
                         : maxWidth
                     }
                     onRenderSuccess={() => {
-                      const lastScrolledPosition =
-                        localStorage.getItem(`${location.pathname}_scrollPosition`);
+                      const lastScrolledPosition = localStorage.getItem(
+                        `knowledge_hub_${path}_scrollPosition`,
+                      );
                       if (lastScrolledPosition) {
                         containerRef.current?.scrollTo(
                           0,
-                          parseInt(lastScrolledPosition, 10),
+                          parseInt(lastScrolledPosition),
                         );
                       }
                     }}
@@ -170,7 +174,7 @@ const Topic = () => {
                 ))}
               </Document>
             )}
-          </div>
+          </StyledBoxComponent>
         </>
       )}
     </div>
