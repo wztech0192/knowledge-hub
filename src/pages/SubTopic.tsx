@@ -1,8 +1,8 @@
 import useRouteMetadataContext from '@/hooks/useRouteMetadataContext';
-import { FormControl, MenuItem, Typography } from '@mui/material';
+import { Box, FormControl, MenuItem, Typography } from '@mui/material';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useResizeObserver } from '@wojtekmaj/react-hooks';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
@@ -11,10 +11,16 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Carousel from 'react-material-ui-carousel';
 import { Paper } from '@mui/material';
 import { BreadCrumbs } from './Subject';
+import styled from '@emotion/styled';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `${
   import.meta.env.BASE_URL
 }pdf.worker.min.js`;
+
+const StyledBoxComponent = styled(Box)(() => ({
+  overflow: 'scroll',
+  height: '100vh',
+}));
 
 const Topic = () => {
   const navigate = useNavigate();
@@ -28,8 +34,10 @@ const Topic = () => {
   const parentTopic = ctx.topicHierarchy?.at(-2); // get parent topic
 
   const [numPages, setNumPages] = useState<number>();
-  const [containerRef, setContainerRef] = useState<HTMLElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerWidth, setContainerWidth] = useState<number>();
+  // const location = useLocation();
+  const path = `${location.pathname}`;
 
   const onResize = useCallback<ResizeObserverCallback>(entries => {
     const [entry] = entries;
@@ -39,7 +47,25 @@ const Topic = () => {
     }
   }, []);
 
-  useResizeObserver(containerRef, resizeObserverOptions, onResize);
+  useEffect(() => {
+    containerRef.current?.addEventListener('scroll', () => {
+      localStorage.setItem(
+        `knowledge_hub_${path}_scrollPosition`,
+        containerRef.current?.scrollTop.toString()!,
+      );
+    });
+
+    return () => {
+      containerRef.current?.removeEventListener('scroll', () => {
+        localStorage.setItem(
+          `knowledge_hub_${path}_scrollPosition`,
+          containerRef.current?.scrollTop.toString()!,
+        );
+      });
+    };
+  });
+
+  useResizeObserver(containerRef.current, resizeObserverOptions, onResize);
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
@@ -87,13 +113,8 @@ const Topic = () => {
                   style={{
                     height: '500px',
                     width: '50%',
-                    margin: '0 auto',
-                    backgroundColor: '#FFA38F',
-                    borderRadius: '60px',
                   }}>
-                  <h1 style={{display: 'flex',
-                    justifyContent: 'center'}}
-                    key={subtopicId}>{subtopic.name}</h1>
+                  <h1 key={subtopicId}>{subtopic.name}</h1>
                 </Paper>
               ))}
           </Carousel>
@@ -123,28 +144,37 @@ const Topic = () => {
             </BreadCrumbs>
           </Typography>
           <hr />
-          <div className="pdf-container">
+          <StyledBoxComponent className="pdf-container" ref={containerRef}>
             {ctx.topic?.assetUrl && (
-              // <Typography>Render PDF {ctx.topic?.assetUrl}</Typography>
-              <div className="pdf-container-document" ref={setContainerRef}>
-                <Document
-                  file={`${import.meta.env.BASE_URL}${ctx.topic?.assetUrl}`}
-                  onLoadSuccess={onDocumentLoadSuccess}>
-                  {Array.from(new Array(numPages), (_, index) => (
-                    <Page
-                      key={`page_${index + 1}`}
-                      pageNumber={index + 1}
-                      width={
-                        containerWidth
-                          ? Math.min(containerWidth, maxWidth)
-                          : maxWidth
+              <Document
+                file={`${import.meta.env.BASE_URL}${ctx.topic?.assetUrl}`}
+                onLoadSuccess={onDocumentLoadSuccess}>
+                {Array.from(new Array(numPages), (_, index) => (
+                  <Page
+                    key={`page_${index + 1}`}
+                    pageNumber={index + 1}
+                    width={
+                      containerWidth
+                        ? Math.min(containerWidth, maxWidth)
+                        : maxWidth
+                    }
+                    onRenderSuccess={() => {
+                      const lastScrolledPosition = localStorage.getItem(
+                        `knowledge_hub_${path}_scrollPosition`,
+                      );
+                      if (lastScrolledPosition) {
+                        containerRef.current?.scrollTo(
+                          0,
+                          parseInt(lastScrolledPosition),
+                        );
                       }
-                    />
-                  ))}
-                </Document>
-              </div>
+                    }}
+                    canvasBackground="#FEF3E2"
+                  />
+                ))}
+              </Document>
             )}
-          </div>
+          </StyledBoxComponent>
         </>
       )}
     </div>
