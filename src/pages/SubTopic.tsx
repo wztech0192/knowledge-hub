@@ -1,17 +1,24 @@
 import useRouteMetadataContext from '@/hooks/useRouteMetadataContext';
-import { Box, FormControl, MenuItem, Typography } from '@mui/material';
+import {
+  Box,
+  FormControl,
+  IconButton,
+  MenuItem,
+  Typography,
+} from '@mui/material';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useResizeObserver } from '@wojtekmaj/react-hooks';
-import 'react-pdf/dist/esm/Page/TextLayer.css';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import '@/assets/css/index.scss';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Carousel from 'react-material-ui-carousel';
 import { Paper } from '@mui/material';
 import { BreadCrumbs } from './Subject';
 import styled from '@emotion/styled';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import '@/assets/css/index.scss';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `${
   import.meta.env.BASE_URL
@@ -21,6 +28,8 @@ const StyledBoxComponent = styled(Box)(() => ({
   overflow: 'scroll',
   height: '100vh',
 }));
+
+//Typography element and then drill down the prop to the child component through the parent component.
 
 const Topic = () => {
   const navigate = useNavigate();
@@ -36,7 +45,6 @@ const Topic = () => {
   const [numPages, setNumPages] = useState<number>();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerWidth, setContainerWidth] = useState<number>();
-  // const location = useLocation();
   const path = `${location.pathname}`;
 
   const onResize = useCallback<ResizeObserverCallback>(entries => {
@@ -47,11 +55,12 @@ const Topic = () => {
     }
   }, []);
 
+
   useEffect(() => {
     containerRef.current?.addEventListener('scroll', () => {
       localStorage.setItem(
         `knowledge_hub_${path}_scrollPosition`,
-        containerRef.current?.scrollTop.toString()!,
+        JSON.stringify(containerRef.current?.scrollTop),
       );
     });
 
@@ -59,11 +68,11 @@ const Topic = () => {
       containerRef.current?.removeEventListener('scroll', () => {
         localStorage.setItem(
           `knowledge_hub_${path}_scrollPosition`,
-          containerRef.current?.scrollTop.toString()!,
+          JSON.stringify(containerRef.current?.scrollTop),
         );
       });
     };
-  });
+  }, []);
 
   useResizeObserver(containerRef.current, resizeObserverOptions, onResize);
 
@@ -144,33 +153,45 @@ const Topic = () => {
             </BreadCrumbs>
           </Typography>
           <hr />
-          <StyledBoxComponent className="pdf-container" ref={containerRef}>
+          <StyledBoxComponent ref={containerRef}>
             {ctx.topic?.assetUrl && (
               <Document
                 file={`${import.meta.env.BASE_URL}${ctx.topic?.assetUrl}`}
                 onLoadSuccess={onDocumentLoadSuccess}>
                 {Array.from(new Array(numPages), (_, index) => (
-                  <Page
-                    key={`page_${index + 1}`}
-                    pageNumber={index + 1}
-                    width={
-                      containerWidth
-                        ? Math.min(containerWidth, maxWidth)
-                        : maxWidth
-                    }
-                    onRenderSuccess={() => {
-                      const lastScrolledPosition = localStorage.getItem(
-                        `knowledge_hub_${path}_scrollPosition`,
-                      );
-                      if (lastScrolledPosition) {
-                        containerRef.current?.scrollTo(
-                          0,
-                          parseInt(lastScrolledPosition),
-                        );
+                  <>
+                    <Page
+                      key={`page_${index + 1}`}
+                      pageNumber={index + 1}
+                      width={
+                        containerWidth
+                          ? Math.min(containerWidth, maxWidth)
+                          : maxWidth
                       }
-                    }}
-                    canvasBackground="#FEF3E2"
-                  />
+                      className="page-wrapper"
+                      onRenderSuccess={() => {
+                        const lastScrolledPosition = localStorage.getItem(
+                          `knowledge_hub_${path}_scrollPosition`,
+                        );
+                        if (lastScrolledPosition) {
+                          containerRef.current?.scrollTo(
+                            0,
+                            parseInt(lastScrolledPosition),
+                          );
+                          containerRef.current?.scrollIntoView({
+                            block: 'start',
+                          });
+                        }
+                      }}
+                      canvasBackground="#FEF3E2">
+                      <IconButton
+                        id={`page_${index + 1}`}
+                        size="small"
+                        sx={{ position: 'absolute', top: '0', right: '0' }}>
+                        <StarBorderIcon />
+                      </IconButton>
+                    </Page>
+                  </>
                 ))}
               </Document>
             )}

@@ -1,6 +1,7 @@
 *{
   margin: 0px;
   padding: 0px;
+  box-sizing: border-box;
 }
 
 body{
@@ -10,8 +11,13 @@ body{
 hr{
   border-color: black;
   border-bottom: none;
-  border-style: dashed;
   border-width: 2px;
   margin-bottom: 20px;
 }
+
+// .page-wrapper{
+//   position: relative;
+// }
+
+
 
