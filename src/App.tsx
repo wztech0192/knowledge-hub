@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 import { MetadataContextProvider } from './providers/MetadataContextProvider';
 import Subject from './pages/Subject';
 import SubTopic from './pages/SubTopic';
+import BookmarkContextProvider from './providers/BookmarksContextProvider';
 
 /**
  * Handles routing
@@ -40,9 +41,11 @@ const router = createBrowserRouter(
 function App() {
   return (
     <MetadataContextProvider>
-      <CustomThemeProvider>
-        <RouterProvider router={router} />
-      </CustomThemeProvider>
+      <BookmarkContextProvider>
+        <CustomThemeProvider>
+          <RouterProvider router={router} />
+        </CustomThemeProvider>
+      </BookmarkContextProvider>
     </MetadataContextProvider>
   );
 }

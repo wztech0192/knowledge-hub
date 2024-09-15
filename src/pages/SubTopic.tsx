@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { useResizeObserver } from '@wojtekmaj/react-hooks';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Carousel from 'react-material-ui-carousel';
@@ -19,6 +19,7 @@ import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import '@/assets/css/index.scss';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import { useBookmarkContext } from '@/providers/BookmarksContextProvider';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `${
   import.meta.env.BASE_URL
@@ -30,6 +31,7 @@ const StyledBoxComponent = styled(Box)(() => ({
 }));
 
 //Typography element and then drill down the prop to the child component through the parent component.
+
 
 const Topic = () => {
   const navigate = useNavigate();
