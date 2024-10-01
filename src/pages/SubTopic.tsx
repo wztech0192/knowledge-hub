@@ -1,14 +1,15 @@
 import useRouteMetadataContext from '@/hooks/useRouteMetadataContext';
 import {
   Box,
+  Divider,
   FormControl,
   IconButton,
   MenuItem,
   Typography,
 } from '@mui/material';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useResizeObserver } from '@wojtekmaj/react-hooks';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Carousel from 'react-material-ui-carousel';
@@ -25,19 +26,16 @@ pdfjs.GlobalWorkerOptions.workerSrc = `${
   import.meta.env.BASE_URL
 }pdf.worker.min.js`;
 
-const StyledBoxComponent = styled(Box)(() => ({
-  overflow: 'scroll',
-  height: '100vh',
-}));
+const StyledBoxComponent = styled(Box)(() => ({}));
 
 //Typography element and then drill down the prop to the child component through the parent component.
 
-
 const Topic = () => {
   const navigate = useNavigate();
+  const { toggleBookmarks } = useBookmarkContext();
   const resizeObserverOptions = {};
-
-  const maxWidth = 800;
+  const location = useLocation();
+  const maxWidth = 1024;
 
   const ctx = useRouteMetadataContext();
 
@@ -57,22 +55,18 @@ const Topic = () => {
     }
   }, []);
 
-
   useEffect(() => {
-    containerRef.current?.addEventListener('scroll', () => {
+    const scrollEvent = () => {
+      // throttling and deboucning
+      // use debouncing for this
       localStorage.setItem(
         `knowledge_hub_${path}_scrollPosition`,
-        JSON.stringify(containerRef.current?.scrollTop),
+        JSON.stringify(window.scrollY),
       );
-    });
-
+    };
+    window.document.addEventListener('scroll', scrollEvent);
     return () => {
-      containerRef.current?.removeEventListener('scroll', () => {
-        localStorage.setItem(
-          `knowledge_hub_${path}_scrollPosition`,
-          JSON.stringify(containerRef.current?.scrollTop),
-        );
-      });
+      window.document.removeEventListener('scroll', scrollEvent);
     };
   }, []);
 
@@ -172,26 +166,39 @@ const Topic = () => {
                       }
                       className="page-wrapper"
                       onRenderSuccess={() => {
-                        const lastScrolledPosition = localStorage.getItem(
-                          `knowledge_hub_${path}_scrollPosition`,
+                        const lastScrolledPosition = parseInt(
+                          localStorage.getItem(
+                            `knowledge_hub_${path}_scrollPosition`,
+                          ) ?? '',
                         );
+
                         if (lastScrolledPosition) {
-                          containerRef.current?.scrollTo(
-                            0,
-                            parseInt(lastScrolledPosition),
-                          );
-                          containerRef.current?.scrollIntoView({
-                            block: 'start',
+                          window.scrollTo({
+                            top: lastScrolledPosition,
                           });
                         }
-                      }}
-                      canvasBackground="#FEF3E2">
+                      }}>
                       <IconButton
                         id={`page_${index + 1}`}
                         size="small"
-                        sx={{ position: 'absolute', top: '0', right: '0' }}>
+                        onClick={() => {
+                          // check if book is already toggled.
+                          toggleBookmarks({
+                            name: `${ctx.topic?.name} - Page ${index + 1}`,
+                            topic: ctx.topic?.name ?? '',
+                            pageNumber: index + 1,
+                            path: location.pathname,
+                          });
+                        }}
+                        sx={{
+                          position: 'absolute',
+                          top: '0',
+                          right: '0',
+                          zIndex: 2,
+                        }}>
                         <StarBorderIcon />
                       </IconButton>
+                      <Divider />
                     </Page>
                   </>
                 ))}

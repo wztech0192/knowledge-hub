@@ -1,42 +1,67 @@
-import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  PropsWithChildren,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
-interface Bookmark{
-    name: string,
-    path: string,
-    topic: string,
-    pageNumber: number
+interface Bookmark {
+  name: string;
+  path: string;
+  topic: string;
+  pageNumber: number;
 }
 
-const BookmarkContext = createContext<Bookmark | []>([]);
+interface BookmarksContext {
+  bookmarks: Bookmark[];
+  toggleBookmarks(bookmark: Bookmark): void;
+}
 
-export default function BookmarkContextProvider({children} : PropsWithChildren){
-    const [bookmarks, setBookmarks] = useState<any[]>(() => {
-        const storedBookmarks = localStorage.getItem('bookmarks');
-        return storedBookmarks ? JSON.parse(storedBookmarks) : [];
+const BookmarkContext = createContext<BookmarksContext>(null!);
+
+export default function BookmarkContextProvider({
+  children,
+}: PropsWithChildren) {
+  const [bookmarks, setBookmarks] = useState<Bookmark[]>(() => { //[{name, path, topic, pageNumber}, {name, path, topic, pageNumber}] -- That's what an array of Bookmark means.
+    const storedBookmarks = localStorage.getItem('bookmarks');
+    console.log(storedBookmarks);
+    return storedBookmarks ? JSON.parse(storedBookmarks) : [];
+  });
+
+  const toggleBookmarks = useCallback((bookmarkData: Bookmark) => {
+    setBookmarks(currentBookmarks => {
+      if (
+        currentBookmarks.some(
+          b =>
+            b.path === bookmarkData.path &&
+            b.pageNumber === bookmarkData.pageNumber,
+        )
+      ) {
+        return currentBookmarks.filter(
+          b =>
+            b.path !== bookmarkData.path ||
+            b.pageNumber !== bookmarkData.pageNumber,
+        );
+      }
+      return [...currentBookmarks, bookmarkData];
     });
+  }, []);
 
-    function toggleBookmarks(bookmarkData: String){
-        setBookmarks((currentBookmark) => {
-            if(currentBookmark.includes(bookmarkData)){
-                return currentBookmark.filter((bookmark) => bookmark !== bookmarkData);
-            }
-            return [...bookmarks, bookmarks];
-        });
-    }
+  useEffect(() => {
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+  }, [bookmarks]);
 
-    useEffect(() => {
-        localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-    }, [bookmarks]);
-
-    return (
-        <BookmarkContext.Provider value={{bookmarks, toggleBookmarks}}>
-            {children}
-        </BookmarkContext.Provider>
-    );
+  return (
+    <BookmarkContext.Provider value={{ bookmarks, toggleBookmarks }}>
+      {children}
+    </BookmarkContext.Provider>
+  );
 }
 
-export function useBookmarkContext(){
-    const context = useContext(BookmarkContext);
-    if(!context) throw new Error("context was called outside of it's provider");
-    return context;
+export function useBookmarkContext() {
+  const context = useContext(BookmarkContext);
+  if (!context) throw new Error("context was called outside of it's provider");
+  return context;
 }
