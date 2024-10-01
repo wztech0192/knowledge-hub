@@ -1,32 +1,41 @@
 import useRouteMetadataContext from '@/hooks/useRouteMetadataContext';
-import { Box, FormControl, MenuItem, Typography } from '@mui/material';
-import { NavLink, useNavigate } from 'react-router-dom';
+import {
+  Box,
+  Divider,
+  FormControl,
+  IconButton,
+  MenuItem,
+  Typography,
+} from '@mui/material';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useResizeObserver } from '@wojtekmaj/react-hooks';
-import 'react-pdf/dist/esm/Page/TextLayer.css';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import '@/assets/css/index.scss';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Carousel from 'react-material-ui-carousel';
 import { Paper } from '@mui/material';
 import { BreadCrumbs } from './Subject';
 import styled from '@emotion/styled';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import '@/assets/css/index.scss';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import { useBookmarkContext } from '@/providers/BookmarksContextProvider';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `${
   import.meta.env.BASE_URL
 }pdf.worker.min.js`;
 
-const StyledBoxComponent = styled(Box)(() => ({
-  overflow: 'scroll',
-  height: '100vh',
-}));
+const StyledBoxComponent = styled(Box)(() => ({}));
+
+//Typography element and then drill down the prop to the child component through the parent component.
 
 const Topic = () => {
   const navigate = useNavigate();
+  const { toggleBookmarks } = useBookmarkContext();
   const resizeObserverOptions = {};
-
-  const maxWidth = 800;
+  const location = useLocation();
+  const maxWidth = 1024;
 
   const ctx = useRouteMetadataContext();
 
@@ -36,7 +45,6 @@ const Topic = () => {
   const [numPages, setNumPages] = useState<number>();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerWidth, setContainerWidth] = useState<number>();
-  // const location = useLocation();
   const path = `${location.pathname}`;
 
   const onResize = useCallback<ResizeObserverCallback>(entries => {
@@ -48,22 +56,19 @@ const Topic = () => {
   }, []);
 
   useEffect(() => {
-    containerRef.current?.addEventListener('scroll', () => {
+    const scrollEvent = () => {
+      // throttling and deboucning
+      // use debouncing for this
       localStorage.setItem(
         `knowledge_hub_${path}_scrollPosition`,
-        containerRef.current?.scrollTop.toString()!,
+        JSON.stringify(window.scrollY),
       );
-    });
-
-    return () => {
-      containerRef.current?.removeEventListener('scroll', () => {
-        localStorage.setItem(
-          `knowledge_hub_${path}_scrollPosition`,
-          containerRef.current?.scrollTop.toString()!,
-        );
-      });
     };
-  });
+    window.document.addEventListener('scroll', scrollEvent);
+    return () => {
+      window.document.removeEventListener('scroll', scrollEvent);
+    };
+  }, []);
 
   useResizeObserver(containerRef.current, resizeObserverOptions, onResize);
 
@@ -144,33 +149,58 @@ const Topic = () => {
             </BreadCrumbs>
           </Typography>
           <hr />
-          <StyledBoxComponent className="pdf-container" ref={containerRef}>
+          <StyledBoxComponent ref={containerRef}>
             {ctx.topic?.assetUrl && (
               <Document
                 file={`${import.meta.env.BASE_URL}${ctx.topic?.assetUrl}`}
                 onLoadSuccess={onDocumentLoadSuccess}>
                 {Array.from(new Array(numPages), (_, index) => (
-                  <Page
-                    key={`page_${index + 1}`}
-                    pageNumber={index + 1}
-                    width={
-                      containerWidth
-                        ? Math.min(containerWidth, maxWidth)
-                        : maxWidth
-                    }
-                    onRenderSuccess={() => {
-                      const lastScrolledPosition = localStorage.getItem(
-                        `knowledge_hub_${path}_scrollPosition`,
-                      );
-                      if (lastScrolledPosition) {
-                        containerRef.current?.scrollTo(
-                          0,
-                          parseInt(lastScrolledPosition),
-                        );
+                  <>
+                    <Page
+                      key={`page_${index + 1}`}
+                      pageNumber={index + 1}
+                      width={
+                        containerWidth
+                          ? Math.min(containerWidth, maxWidth)
+                          : maxWidth
                       }
-                    }}
-                    canvasBackground="#FEF3E2"
-                  />
+                      className="page-wrapper"
+                      onRenderSuccess={() => {
+                        const lastScrolledPosition = parseInt(
+                          localStorage.getItem(
+                            `knowledge_hub_${path}_scrollPosition`,
+                          ) ?? '',
+                        );
+
+                        if (lastScrolledPosition) {
+                          window.scrollTo({
+                            top: lastScrolledPosition,
+                          });
+                        }
+                      }}>
+                      <IconButton
+                        id={`page_${index + 1}`}
+                        size="small"
+                        onClick={() => {
+                          // check if book is already toggled.
+                          toggleBookmarks({
+                            name: `${ctx.topic?.name} - Page ${index + 1}`,
+                            topic: ctx.topic?.name ?? '',
+                            pageNumber: index + 1,
+                            path: location.pathname,
+                          });
+                        }}
+                        sx={{
+                          position: 'absolute',
+                          top: '0',
+                          right: '0',
+                          zIndex: 2,
+                        }}>
+                        <StarBorderIcon />
+                      </IconButton>
+                      <Divider />
+                    </Page>
+                  </>
                 ))}
               </Document>
             )}

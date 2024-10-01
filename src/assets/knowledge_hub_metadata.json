@@ -145,6 +145,14 @@
                 {
                   "name": "Operations",
                   "assetUrl": "resources/pdffiles/discretemath/07_02_matrix_operations.pdf"
+                },
+                {
+                  "name": "Matrix Multiplication",
+                  "assetUrl": "resources/pdffiles/discretemath/07_03_matrix_multiplication.pdf"
+                },
+                {
+                  "name": "Matrix inverse",
+                  "assetUrl": "resources/pdffiles/discretemath/07_04_matrix_inverse.pdf"
                 }
               ]
             },
@@ -200,6 +208,14 @@
                 {
                   "name": "Recursive Sequences 2",
                   "assetUrl": "resources/pdffiles/discretemath/10_02_sequences.pdf"
+                },
+                {
+                  "name": "Recursive Sequences 3",
+                  "assetUrl": "resources/pdffiles/discretemath/10_03_sequences.pdf"
+                },
+                {
+                  "name": "Recursive Sequences 4",
+                  "assetUrl": "resources/pdffiles/discretemath/10_04_sequences.pdf"
                 }
               ]
             },

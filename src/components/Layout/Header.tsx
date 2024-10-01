@@ -1,17 +1,67 @@
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { alpha } from '@mui/material/styles';
-import { Box, IconButton, styled } from '@mui/material';
+import { Box, IconButton, Menu, MenuItem, styled } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { ThemeToggle } from './ThemeToggle';
-import { NavLink } from 'react-router-dom';
-import { Home } from '@mui/icons-material';
-import {SearchBar} from "@/pages/SearchBar"
+import { NavLink, useNavigate } from 'react-router-dom';
+import { Bookmark, Home } from '@mui/icons-material';
+import { SearchBar } from '@/pages/SearchBar';
+import React, { useState } from 'react';
+import { useBookmarkContext } from '@/providers/BookmarksContextProvider';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   background: theme.palette.mode === 'dark' ? '#292928' : '#121212',
   color: theme.palette.mode === 'dark' ? '#FFFFFF' : '#FFFFFF',
   boxShadow: 'none',
 }));
+
+function SimpleBookmarkMenu() {
+  const navigate = useNavigate();
+  const { bookmarks, toggleBookmarks } = useBookmarkContext();
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose: () => void = () => {
+    setAnchorEl(null);
+  };
+
+  const handleBookmarkNavigation = (path: string) => {
+    navigate(`${path}`);
+    handleClose();
+  };
+
+  return (
+    <>
+      <IconButton color="inherit" onClick={handleClick}>
+        <Bookmark />
+      </IconButton>
+      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+        {bookmarks.length > 0 ? (
+          bookmarks.map((bookmark, index) => (
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <MenuItem
+                key={index}
+                onClick={() => {
+                  handleBookmarkNavigation(bookmark.path);
+                }}
+                divider>
+                {bookmark.name}
+              </MenuItem>
+              <IconButton onClick={() => toggleBookmarks(bookmark)}>
+                <DeleteIcon />
+              </IconButton>
+            </Box>
+          ))
+        ) : (
+          <MenuItem onClick={handleClose}>No Bookmarks</MenuItem>
+        )}
+      </Menu>
+    </>
+  );
+}
 
 export const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -44,9 +94,10 @@ export const Header = () => {
         </IconButton>
         <Box sx={{ flexGrow: 1 }}>
           <Search>
-              <SearchBar/>
+            <SearchBar />
           </Search>
         </Box>
+        <SimpleBookmarkMenu />
         <ThemeToggle />
       </Toolbar>
     </StyledAppBar>

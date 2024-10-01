@@ -56,11 +56,10 @@ export const Home = () => {
                               variant="body1"
                               color="text.secondary"
                               gutterBottom>
-                              Discrete math deals with distinct, separate values
-                              and structures like sets, functions, and graphs.
-                              It's crucial in computer science, focusing on
-                              logical reasoning and proof techniques to solve
-                              problems efficiently.
+                              This is the website of Math 174 Discrete Math for
+                              Computer Science in Department of Computer
+                              Science, Engineering, and Mathematics at the
+                              University of South Carolina Aiken.
                             </Typography>
                             <Typography
                               variant="button"
