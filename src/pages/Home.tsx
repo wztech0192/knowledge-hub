@@ -9,7 +9,7 @@ import {
   CardContent,
   CardActionArea,
 } from '@mui/material';
-import airballon from '../assets/images/airballoon.png';
+import airballon from '../assets/images/airballoon.webp';
 import { NavLink } from 'react-router-dom';
 import '../assets/css/index.scss';
 
@@ -18,13 +18,6 @@ export const Home = () => {
   return (
     <Box>
       <Container maxWidth="xs">
-        {metadata.categories.map((c, ci) => (
-          <div key={ci}>
-            <Typography>
-              Category: <b>{c.name}</b>
-            </Typography>
-          </div>
-        ))}
         <Grid container spacing={3} key={'false'}>
           <Grid item xs={12}>
             {metadata.categories.map((c, ci) => (

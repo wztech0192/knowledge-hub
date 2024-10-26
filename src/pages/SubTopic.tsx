@@ -15,7 +15,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Carousel from 'react-material-ui-carousel';
 import { Paper } from '@mui/material';
 import { BreadCrumbs } from './Subject';
-import styled from '@emotion/styled';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import '@/assets/css/index.scss';
@@ -26,7 +25,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = `${
   import.meta.env.BASE_URL
 }pdf.worker.min.js`;
 
-const StyledBoxComponent = styled(Box)(() => ({}));
 
 //Typography element and then drill down the prop to the child component through the parent component.
 
@@ -149,7 +147,7 @@ const Topic = () => {
             </BreadCrumbs>
           </Typography>
           <hr />
-          <StyledBoxComponent ref={containerRef}>
+          <Box ref={containerRef}>
             {ctx.topic?.assetUrl && (
               <Document
                 file={`${import.meta.env.BASE_URL}${ctx.topic?.assetUrl}`}
@@ -204,7 +202,7 @@ const Topic = () => {
                 ))}
               </Document>
             )}
-          </StyledBoxComponent>
+          </Box>
         </>
       )}
     </div>

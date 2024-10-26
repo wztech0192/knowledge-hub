@@ -66,11 +66,6 @@ export const SearchBar = () => {
             minRows="2"
             InputProps={{
               ...params.InputProps,
-              startAdornment: (
-                <InputAdornment position="start">
-                    <SearchIcon sx={{color: "white"}}/>
-                </InputAdornment>
-              )
             }
             }
             />
