@@ -12,9 +12,23 @@ import {
 import airballon from '../assets/images/airballoon.webp';
 import { NavLink } from 'react-router-dom';
 import '../assets/css/index.scss';
+import React from 'react';
+
+const preloadImage = () => {
+  const link = document.createElement('link');
+  link.rel = 'preload';
+  link.as = 'image';
+  link.href = airballon;
+  document.head.appendChild(link);
+};
 
 export const Home = () => {
   const metadata = useMetadata();
+
+  React.useEffect(() => {
+    preloadImage();
+  }, []);
+  
   return (
     <Box>
       <Container maxWidth="xs">
@@ -29,8 +43,12 @@ export const Home = () => {
                         <CardMedia
                           component="img"
                           alt="Hot Air Baloon"
-                          height="210"
                           image={airballon}
+                          sx={{
+                            objectFit: 'cover',
+                            height: '210px',
+                            backgroundColor: '#f0f0f0',
+                          }}
                         />
                         <NavLink
                           to={`/category/${si}/subject/${si}`}

@@ -1,8 +1,7 @@
 import { useMetadata } from '@/providers/MetadataContextProvider';
-import { Autocomplete, InputAdornment, styled, TextField } from '@mui/material';
+import { Autocomplete, styled, TextField } from '@mui/material';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SearchIcon from '@mui/icons-material/Search';
 
 interface OptionObject {
   path: string;

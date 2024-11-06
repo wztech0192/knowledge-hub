@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useResizeObserver } from '@wojtekmaj/react-hooks';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Carousel from 'react-material-ui-carousel';
@@ -153,7 +153,7 @@ const Topic = () => {
                 file={`${import.meta.env.BASE_URL}${ctx.topic?.assetUrl}`}
                 onLoadSuccess={onDocumentLoadSuccess}>
                 {Array.from(new Array(numPages), (_, index) => (
-                  <>
+                  <React.Fragment key={index}>
                     <Page
                       key={`page_${index + 1}`}
                       pageNumber={index + 1}
@@ -179,6 +179,7 @@ const Topic = () => {
                       <IconButton
                         id={`page_${index + 1}`}
                         size="small"
+                        key={index}
                         onClick={() => {
                           // check if book is already toggled.
                           toggleBookmarks({
@@ -198,7 +199,7 @@ const Topic = () => {
                       </IconButton>
                       <Divider />
                     </Page>
-                  </>
+                  </React.Fragment>
                 ))}
               </Document>
             )}
