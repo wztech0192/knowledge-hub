@@ -36,7 +36,7 @@ export default function BookmarkContextProvider({
         currentBookmarks.some(
           b =>
             b.path === bookmarkData.path &&
-            b.pageNumber === bookmarkData.pageNumber,
+            b.pageNumber === bookmarkData.pageNumber
         )
       ) {
         return currentBookmarks.filter(
