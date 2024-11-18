@@ -4,4 +4,6 @@ Issue 3
 2. Did modification to the UI for the subject Page
 3. Did some tweaking to change the size of the input of the search bar
 4. Changed some CSS to make the background standout a bit
-5. 
+
+
+If in the future the app fails to load the pdf file, remember to uninstall react-pdf and pdfjs-dist using npm uninstall react-pdf pdfjs-dist. And then install the specific version of those libaries using the command npm install react-pdf@v8 pdfjs-dist@v3.11.174. This way it will prevent the pdf from failing to load.
