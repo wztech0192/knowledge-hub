@@ -13,6 +13,7 @@ export default defineConfig(({ mode }) => {
         strategies: 'generateSW',
         workbox: {
           maximumFileSizeToCacheInBytes: 7000000,
+          globPatterns: ['/resources/pdffiles/discretemath/*.{}'],
         },
         registerType: 'autoUpdate',
         devOptions: {
